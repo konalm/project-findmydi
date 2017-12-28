@@ -74,7 +74,6 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import {http} from '../../http-requests'
-
 import signUpSuccess from './SignUpSuccess.vue'
 
 
