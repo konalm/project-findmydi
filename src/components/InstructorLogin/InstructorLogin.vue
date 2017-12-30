@@ -41,6 +41,8 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import {http} from '@/http-requests'
 import cookies from 'js-cookie'
+import router from '@/router'
+
 
 @Component({})
 export default class InstructorLogin extends Vue {
@@ -53,11 +55,10 @@ export default class InstructorLogin extends Vue {
       password: this.password 
     })
     .then(res => {
-      console.log('login res ---->')
-      console.log(res)
-
       cookies.set('findmydi_token', res.data.access_token)
-      window.location.href = '/portal';
+      this.$store.commit('setAccessToken', res.data.access_token)
+
+      router.push({name: 'InstructorPortal'})
     })
     .catch((err) => {
       throw new Error(err)

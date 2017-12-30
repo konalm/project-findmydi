@@ -1,5 +1,5 @@
 <template>
-   <div class="container">
+  <div class="container">
     <h3 class="text-center">Super Admin</h3>
 
     <form v-on:submit.prevent="submit()">
@@ -43,6 +43,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import cookies from 'js-cookie'
 import {httpAuth} from '@/http-requests'
+import router from '@/router'
 
 @Component({})
 export default class SuperAdminLogin extends Vue {
@@ -54,8 +55,6 @@ export default class SuperAdminLogin extends Vue {
    * super username and password to api for verification
    */
   submit() {
-    console.log('submit')
-
     if (!this.validation()) { return }
 
     httpAuth.post('super-admin-login', {
@@ -63,9 +62,10 @@ export default class SuperAdminLogin extends Vue {
       password: this.password
     })
       .then(res => {
-        console.log(res)
-        console.log(res.data.access_token)
         cookies.set('findmydi_token', res.data.access_token)
+        this.$store.commit('setAccessToken', res.data.access_token)
+
+        router.push({name: 'InstructorPortal'})
       })
       .catch(err => {
         throw new Error(err)
@@ -76,7 +76,6 @@ export default class SuperAdminLogin extends Vue {
    * validate all inputs where entered 
    */
   validation() {
-    console.log('validation')
     this.response = ''
 
     if (!this.username) {

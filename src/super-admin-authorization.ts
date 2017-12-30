@@ -11,7 +11,7 @@ const superAdminAuthCheck = (to, from, next) => {
     })
     .catch(err => {
       console.log('catch SA auth')
-      router.push({name: 'InstructorLogin'}) 
+      router.push({name: 'SuperAdminLogin'}) 
     })
 }
 

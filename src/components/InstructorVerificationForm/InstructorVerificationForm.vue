@@ -56,6 +56,7 @@
 <script lang='ts'>
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import router from '@/router'
 import uploadAdiLicense from './children/UploadAdiLicense.vue'
 import {httpAuth} from '@/http-requests'
 
@@ -71,6 +72,37 @@ export default class InstructorVerification extends Vue {
   adiLicensePhoto: string = ''
   submitResponse: string = ''
 
+  get user() {
+    return this.$store.getters.user
+  }
+
+  beforeMount() {
+    this.checkInstructorNotVerified()
+  }
+
+  /**
+   * check instructor is not already verified, 
+   * If there are then redirect them
+   */
+  checkInstructorNotVerified() {
+    if (this.user.verified === 1) {
+      router.push({name: 'InstructorPortal'})
+      return
+    }
+
+    httpAuth.get('user-db')
+      .then(res => {
+        if (res.data.verified === 1) {
+          router.push({name: 'InstructorPortal'})
+          return
+        }
+      })
+      .catch(err => {
+        throw new Error(err)
+      })
+  }
+  
+
   /** 
    * 
    */
@@ -80,6 +112,7 @@ export default class InstructorVerification extends Vue {
 
   /** 
    * submit credentials for review by super admin (Connor)
+   * redirect back to portal
    */
   submitForReview() {
     this.submitResponse = '';
@@ -94,13 +127,15 @@ export default class InstructorVerification extends Vue {
         this.submitResponse = 
         'Your details have been submitted for review, you can expect' +
         ' a response within 24 hours.'
+
+        router.push({name: 'InstructorPortal'})
       })
       .catch(err => {
         this.submitResponse = 
           'There was an issue submitting your details for review'
+          
         throw new Error(err)
       })
   }
 }
-
 </script>

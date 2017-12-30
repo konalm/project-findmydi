@@ -7,6 +7,7 @@ import InstructorLogin from '@/components/InstructorLogin'
 import InstructorSignUp from '@/components/InstructorSignUp'
 import InstructorPortal from '@/components/InstructorPortal'
 import InstructorVerfication from '@/components/InstructorVerificationForm'
+import InstructorCoverage from '@/components/InstructorCoverage'
 
 import SuperAdminLogin from '@/components/SuperAdmin/SuperAdminLogin'
 import HandleUserVerification from '@/components/SuperAdmin/HandleUserVerification'
@@ -48,6 +49,12 @@ export default new Router({
       path: '/verification-form',
       name: 'InstructorVerification',
       component: InstructorVerfication,
+      beforeEnter: Auth
+    },
+    {
+      path: '/coverage',
+      name: 'InstructorConverage',
+      component: InstructorCoverage,
       beforeEnter: Auth
     },
     {

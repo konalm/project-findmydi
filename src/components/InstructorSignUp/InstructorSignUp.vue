@@ -30,6 +30,18 @@
             >
         </div>
 
+        <!-- password -->
+        <div class="form-group">
+          <label>Password</label>
+
+          <input 
+            type="password"
+            class="form-control"
+            placeholder="Enter Password"
+            v-model="password"
+          >
+        </div>
+
         <!-- postcode -->
         <div class="form-group">
             <label>Postcode</label>
@@ -85,6 +97,7 @@ import signUpSuccess from './SignUpSuccess.vue'
 export default class InstructorSignUp extends Vue {
   name: string = ''
   email: string = ''
+  password: string = ''
   postcode: string = ''
   range: number = 0
   registered: boolean = false
@@ -99,6 +112,7 @@ export default class InstructorSignUp extends Vue {
     http.post('users', {
       name: this.name,
       email: this.email,
+      password: this.password,
       postcode: this.postcode,
       range: this.range
     })
