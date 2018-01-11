@@ -1,13 +1,12 @@
 <template>
-  <div class="card mt-5" v-if="verifiedStatus !== 1">
+  <div class="white-modal-box__container text-center" v-if="verifiedStatus !== 1">
     <div class="card-block p-2" v-if="!verifiedStatus">
       <p class="card-text">
-        Complete A few more steps to get verified and your future students 
-        will be able to find you right away!
+        We need a few more details before we can verify you.
       </p>
 
       <router-link to="/verification-form">
-        <button class="btn btn-success">Get Verified</button>
+        <button class="warning">Get Verified!</button>
       </router-link>
     </div>
 

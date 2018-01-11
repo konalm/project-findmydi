@@ -1,0 +1,42 @@
+.my-form {
+  margin-top: 30px;
+  max-width: 680px;
+
+  .form-row {
+    margin-bottom: 25px;
+
+    .form-check-input {
+      margin-top: -0.6rem;
+    }
+
+    .form-check-label.male {
+      margin-left: 20px;
+    }
+
+    input {
+      height: 42px;
+    }
+  }
+
+  .form-row.split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+    }
+
+    input {
+      width: 47%;
+
+      @media screen and (max-width: 600px) {
+        width: 100%;
+
+        &:first-child {
+          margin-bottom: 25px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.logged-out-header {
+  background: white;
+  height: 60px;
+  width: 100%;
+  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .05);
+
+  .container {
+    @media screen and (max-width: 991px) {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+    }
+  }
+
+  ul.logged-out-header__nav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    height: 60px;
+
+    li {
+      margin-right: 35px;
+      list-style: none;
+      font-size: 16px;
+    }
+  }
+}

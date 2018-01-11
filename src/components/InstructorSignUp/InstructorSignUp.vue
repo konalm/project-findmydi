@@ -1,72 +1,93 @@
 <template>
   <div>
-    <h1 class="text-center">
-      Sign Up and Let Your future student's find you
-    </h1>
+    <logged-out-header />
 
-    <div class="container mt-5">
+    <h1 class="text-center"> Sign Up </h1>
+
+    <div class="container my-form">
       <form v-on:submit.prevent="submitSignUp()" v-if="!registered">
-        <!-- full name -->
-        <div class="form-group">
-          <label>Full name</label>
+        <!-- name -->
+        <div class="form-row split form-group">
+          <input 
+            type="text" 
+            class="form-control"
+            placeholder="First Name"
+            v-model="firstName"
+          >
 
           <input 
             type="text" 
             class="form-control"
-            placeholder="Enter full name"
-            v-model="name"
+            placeholder="Surname"
+            v-model="surname"
           >
         </div>
 
         <!-- email -->
-        <div class="form-group">
-            <label>Email</label>
-
+        <div class="form-row">
             <input 
               type="email" 
               class="form-control"
-              placeholder="Enter Email Address"
+              placeholder="Email Address"
               v-model="email"
             >
         </div>
 
-        <!-- password -->
-        <div class="form-group">
-          <label>Password</label>
+        <!-- adi license number -->
+        <div class="form-row">
+          <input 
+            type="number" 
+            class="form-control" 
+            placeholder="ADI License Number" 
+            v-model="adi"
+          >
+        </div>
 
+        <!-- password -->
+        <div class="form-row">
           <input 
             type="password"
             class="form-control"
-            placeholder="Enter Password"
+            placeholder="Password"
             v-model="password"
           >
         </div>
 
-        <!-- postcode -->
-        <div class="form-group">
-            <label>Postcode</label>
-            
+        <!-- confirm pasword -->
+        <div class="form-row">
             <input 
               type="text" 
               class="form-control" 
-              placeholder="Enter Postcode Where you wish to give lessons" 
-              v-model="postcode"
+              placeholder="Confirm Password" 
+              v-model="confirmPassword"
             >
         </div>
 
-        <!-- range -->
-        <div class="form-group">
-          <label>Range</label>
-          
-          <input 
-            type="number" 
-            class="form-control" 
-            placeholder="Enter mile radius you wish to cover" 
-            v-model="range"
-          >
+        <div class="form-row">
+          <label class="form-check-label">
+            <input 
+              type="radio" 
+              class="form-check-input" 
+              value="female"
+              v-model="gender"
+            >
+            Female
+          </label>
+
+            <label class="form-check-label male">
+            <input 
+              type="radio" 
+              class="form-check-input" 
+              value="male" checked
+              v-model="gender"
+            >
+            Male
+          </label>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-row">
+          <button type="submit" class="form">Sign Me Up</button>
+        </div>
 
         <!-- error message -->
         <div class="form-group mt-3" v-if="errorMessage">
@@ -88,18 +109,24 @@ import Component from 'vue-class-component'
 import {http} from '../../http-requests'
 import signUpSuccess from './SignUpSuccess.vue'
 
+import loggedOutHeader from '@/components/patterns/logged-out-header'
+
 
 @Component({
   components: {
-    signUpSuccess
+    signUpSuccess,
+    loggedOutHeader
+
   }
 })
 export default class InstructorSignUp extends Vue {
-  name: string = ''
+  firstName: string = ''
+  surname: string = ''
   email: string = ''
+  adi: string = ''
   password: string = ''
-  postcode: string = ''
-  range: number = 0
+  confirmPassword: string = ''
+  gender: string= ''
   registered: boolean = false
   errorMessage: string = ''
 
@@ -107,14 +134,15 @@ export default class InstructorSignUp extends Vue {
    * submit sign up details to the api to create new user model 
    */
   submitSignUp() { 
-    this.errorMessage = ''
+    if (!this.validate()) { return }
 
-    http.post('users', {
-      name: this.name,
+    http.post('instructors', {
+      firstName: this.firstName,
+      surname: this.surname,
       email: this.email,
+      adiLicenseNo: this.adi,
+      gender: this.gender,
       password: this.password,
-      postcode: this.postcode,
-      range: this.range
     })
       .then(res => {
         this.registered = true
@@ -127,5 +155,53 @@ export default class InstructorSignUp extends Vue {
         throw new Error(err) 
       })
   }
+
+  /**
+   * validate inputs
+   */
+  validate() {
+    this.errorMessage = ''
+
+    if (!this.firstName) {
+      this.errorMessage = 'First name is required'
+      return false
+    }
+
+    if (!this.surname) {
+      this.errorMessage = 'Surname is required'
+      return false
+    }
+
+    if (!this.email) {
+      this.errorMessage = 'Email is required'
+      return false
+    }
+
+    if (!this.adi) {
+      this.errorMessage = 'ADI license no is required'
+      return false
+    }
+
+    if (!this.password) {
+      this.errorMessage = 'Password is required'
+      return false
+    }
+
+    if (this.password !== this.confirmPassword) {
+      this.errorMessage = 'Confirm password does not match'
+      return false
+    }
+
+    if (!this.gender) {
+      this.errorMessage = 'Gender is required'
+      return false
+    }
+
+    return true
+  }
 }
 </script>
+
+
+
+<style scoped lang="scss" src="./instructor-sign-up.scss" />

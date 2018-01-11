@@ -1,0 +1,16 @@
+.portal-page {
+  background-color: #FAFAFA;
+}
+
+.instructor-portal {
+  display: flex;
+  flex-direction: row;
+
+  .instructor-portal__left-side, .instructor-portal__right-side {
+    width: 50%;
+  }
+
+  .spacer {
+    width: 40px;
+  }
+}

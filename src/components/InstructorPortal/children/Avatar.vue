@@ -1,5 +1,8 @@
 <template>
-  <div class="avatar-upload">
+<div class="white-modal-box">
+  <p class="modal-box-header">Avatar</p>
+
+  <div class="white-modal-box__container avatar-upload">
     <form 
       enctype="multipart/form-data"
       novalidate
@@ -50,6 +53,7 @@
       </div>
     </form>
   </div>
+</div>
 </template>
 
 <script lang="ts">
@@ -103,6 +107,7 @@ export default class InstructorAvatar extends Vue {
     httpAuth.post('/upload-avatar', data)
       .then(res => {
         this.$emit('newAvatarUploaded')
+
         this.$refs.avatar.value = ''
       })
       .catch(err => {

@@ -1,25 +1,29 @@
 <template>
   <div>
-    <h1 class="text-center">
-      Find Driving Instructors in your area
-    </h1>
+    <Header />
 
     <div class="container mt-5">
-      <form v-on:submit.prevent="searchForInstructors()">
-        <!-- postcode -->
-        <div class="form-group">
-          <label>Postcode</label>
+      <div class="search-page__main-container">
+        <h1>Find My Driving Instructor</h1>
 
-          <input 
-            type="text" 
-            class="form-control"
-            placeholder="Enter postcode where you wish to recieve lessons"
-            v-model="postcode"
-          >
-        </div>
+        <form v-on:submit.prevent="searchForInstructors()">
+          <div class="search-container">
+            <input 
+              type="text" 
+              class="form-control"
+              placeholder="Enter Your postcode"
+              v-model="postcode"
+            >
+            <button type="submit" class="base-button">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button> 
+          </div>
+        </form>
 
-        <button type="submit" class="btn btn-success">Submit</button>
-      </form>
+        <p class="search-container__lower-text lead">
+          Find qualified driving instructors within your reach 
+        </p>
+      </div>
 
       <ul class="instructors-found-container mt-5 list-group">
         <li class="list-group-item"
@@ -45,11 +49,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import Header from '@/components/patterns/user-header'
 import {http} from '../../http-requests'
 import noDriversResponse from './NoDriversResponse.vue'
 
 @Component({
   components: {
+    Header,
     noDriversResponse
   }
 })
@@ -75,3 +81,6 @@ export default class InstructorSearch extends Vue {
   }
 }
 </script>
+
+
+<style lang="scss" scoped src="./instructor-search.scss" />

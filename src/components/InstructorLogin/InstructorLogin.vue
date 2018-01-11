@@ -1,35 +1,42 @@
 <template>
-  <div>
-    <h1 class="text-center">Instructor Login</h1>
+  <div class="page-wrapper">
+    <logged-out-header />
 
-    <div class="container mt-5">
-      <form v-on:submit.prevent="submitLogin()">
-        <!-- Email -->
-        <div class="form-group">
-          <label>Email</label>
+    <div class="login-page">
+      <div class="login-container">
+        <h1 class="text-center">Sign In</h1>
 
-          <input 
-            type="email"
-            class="form-control"
-            placeholder="Enter Email"
-            v-model="email" 
-          >
+        <div class="container my-form">
+          <form v-on:submit.prevent="submitLogin()">
+            <!-- Email -->
+            <div class="form-row">
+              <input 
+                type="email"
+                class="form-control"
+                placeholder="Enter Email"
+                v-model="email" 
+              >
+            </div>
+
+            <!-- password -->
+            <div class="form-row">
+              <input 
+                type="password"
+                class="form-control"
+                placeholder="Enter Password"
+                v-model="password" 
+              >
+            </div>
+
+            <p class="text-danger" v-if="errorMessage">{{ errorMessage }}</p> 
+
+            <div class="form-row">
+              <button type="submit" class="form">Sign Me In</button>
+            
+            </div>
+          </form>
         </div>
-
-        <!-- password -->
-        <div class="form-group">
-          <label>Password</label>
-
-          <input 
-            type="password"
-            class="form-control"
-            placeholder="Enter Password"
-            v-model="password" 
-          >
-        </div>
-
-        <button type="submit" class="btn btn-primary">Login</button>
-      </form>
+      </div>
     </div>
   </div>
 </template>
@@ -40,30 +47,66 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import {http} from '@/http-requests'
-import cookies from 'js-cookie'
+import {httpAuth, updateHttpHeader} from '@/http-requests'
+
 import router from '@/router'
 
+import loggedOutHeader from '@/components/patterns/logged-out-header'
 
-@Component({})
+
+@Component({
+  components: {
+    loggedOutHeader
+  }
+})
 export default class InstructorLogin extends Vue {
   email: string = ''
   password: string = ''
-
+  errorMessage: string = ''
+  
+  /**
+   * submit email and password to api for credential check
+   * if successfully store access token recieved in Cookie and Store
+   */
   submitLogin() {
+    if (!this.validation()) { return }
+
     http.post('login', {
       email: this.email,
       password: this.password 
     })
     .then(res => {
-      cookies.set('findmydi_token', res.data.access_token)
-      this.$store.commit('setAccessToken', res.data.access_token)
+      localStorage.setItem('token', res.data.access_token)
+      updateHttpHeader()
 
       router.push({name: 'InstructorPortal'})
     })
     .catch((err) => {
-      throw new Error(err)
+      this.errorMessage = err.response.data
     })
+  }
+
+  /**
+   * validate user inputs
+   */
+  validation() {
+    this.errorMessage = ''
+
+    if (!this.email) {
+      this.errorMessage = 'Must enter email'
+      return false
+    }
+
+    if (!this.password) {
+      this.errorMessage = 'Must enter password'
+      return false
+    }
+
+    return true
   }
 }
 </script>
 
+
+
+<style lang="scss" scoped src="./instructor-login.scss" />

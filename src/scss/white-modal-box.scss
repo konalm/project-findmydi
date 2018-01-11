@@ -1,0 +1,20 @@
+.white-modal-box {
+  .modal-box-header {
+    color: #2EA663;
+    font-weight: bold;
+    padding-left: 30px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+.white-modal-box__container {
+  background: white;
+  padding: 15px;
+  padding-left: 30px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .05);
+  font-size: 16px;
+}

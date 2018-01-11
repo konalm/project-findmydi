@@ -21,11 +21,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'LandingPage',
-      component: LandingPage
-    },
-    {
-      path: '/instructor-search',
       name: 'InstructorSearch',
       component: InstructorSearch
     },

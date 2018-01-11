@@ -1,9 +1,14 @@
 <template>
-  <div>
-    <h3 class="text-center text-success">
-      You have successfully listed, You will now be visible to 
-      students in your area.
-    </h3>
+  <div class="message-container">
+   <p class="text-success">
+      You have successfully create an account!
+  </p>
+
+    <router-link to="login">
+      <button class="base-button">
+        Go To Login
+      </button>
+    </router-link>
   </div>
 </template>
 
