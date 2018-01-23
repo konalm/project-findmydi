@@ -4,8 +4,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
-
-  transform: translate(-50%, calc(-50% - 100px));
+  transform: translate(-50%, -50%);
 
   .search-container {
     display: flex;
@@ -16,7 +15,7 @@
 
     input {
       width: 500px;
-      border: 1px solid rgb(170,170,170);
+      // border: 1px solid rgb(170,170,170);
       // height: 63px;,;
     }
 

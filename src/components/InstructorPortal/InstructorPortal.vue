@@ -1,11 +1,19 @@
 <template>
   <div class="portal-page">
-    <Header />
+    <InstructorHeader :loggedIn="true" />
     
     <div class="container mt-5 instructor-portal">
       <div class="instructor-portal__left-side">
-        <profile />
-        <coverage />
+        <profile 
+          :userProfile="user" 
+          v-on:profileUpdated="getUser"
+        />
+
+        <coverage
+          :coverage="user.coverages" 
+          v-on:coverageModified="getUser"  
+        />
+
         <stats />
       </div>
 
@@ -17,9 +25,7 @@
           v-on:newAvatarUploaded="getUser"
         />
 
-        <verification-request
-          :verifiedStatus="user.verified"
-        />
+        <verification-request :verifiedStatus="user.verified" />
 
         <VerificationRequirments />
       </div>
@@ -35,9 +41,9 @@ import Component from 'vue-class-component'
 import {httpAuth} from '../../http-requests'
 import Avatar from './children/Avatar.vue'
 import VerificationRequest from './children/UserVerifiedStatus.vue'
-import Header from '@/components/patterns/header'
+import InstructorHeader from '@/components/patterns/instructor-header'
 import Profile from './children/Profile.vue'
-import Coverage from './children/Coverage.vue'
+import Coverage from './children/coverage'
 import Stats from './children/Stats.vue'
 import VerificationRequirments from './children/VerificationRequirments.vue'
 
@@ -46,7 +52,7 @@ import VerificationRequirments from './children/VerificationRequirments.vue'
   components: {
     Avatar,
     VerificationRequest,
-    Header,
+    InstructorHeader,
     Profile,
     Coverage,
     Stats,
@@ -58,53 +64,34 @@ export default class InstructorPortal extends Vue {
 
   user = {
     id: '',
-    name: '',
+    firstName: '',
+    surname: '',
     email: '',
-    postcode: '',
+    postcodes: '',
     radius: '',
     verified: 0,
     has_avatar: 0,
+    coverages: []
   }
 
-  get postcode() {
-    return this.user.postcode ? this.user.postcode : 'not yet specified'
-  }
+  get postcodes() {
+    if (!this.user.postcodes) { return }
 
-  get radius() {
-    return this.user.radius ? this.user.radius : 'not yet specified'
+    return this.user.postcodes.split(",");
   }
 
   beforeMount() {
     this.getUser()
   }
 
+  /**
+   * get instructor from the api
+   */
   getUser() {
-    httpAuth.get('user-db')
+    httpAuth.get('instructor')
       .then(res => {
         this.user = res.data
-      })
-      .catch(err => {
-        throw new Error(err)
-      })
-  }
-
-  /**
-   * 
-   */
-  updateProfilePic(targetFiles) {
-    this.profilePic = targetFiles[0]
-  }
-
-  /**
-   * send uploaded pic to the api to be stored
-   */
-  uploadProfilePic () {
-    let data = new FormData()
-    data.append('file', this.profilePic)
-
-    httpAuth.post('/upload-profile-pic', data)
-      .then(res => {
-
+        this.user.coverages = JSON.parse(res.data.coverages)
       })
       .catch(err => {
         throw new Error(err)

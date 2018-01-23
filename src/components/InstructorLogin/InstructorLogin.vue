@@ -1,6 +1,8 @@
 <template>
   <div class="page-wrapper">
-    <logged-out-header />
+    <instructor-header
+      :loggedIn="false" 
+    />
 
     <div class="login-page">
       <div class="login-container">
@@ -32,7 +34,6 @@
 
             <div class="form-row">
               <button type="submit" class="form">Sign Me In</button>
-            
             </div>
           </form>
         </div>
@@ -51,12 +52,12 @@ import {httpAuth, updateHttpHeader} from '@/http-requests'
 
 import router from '@/router'
 
-import loggedOutHeader from '@/components/patterns/logged-out-header'
+import InstructorHeader from '@/components/patterns/instructor-header'
 
 
 @Component({
   components: {
-    loggedOutHeader
+    InstructorHeader
   }
 })
 export default class InstructorLogin extends Vue {
@@ -76,6 +77,9 @@ export default class InstructorLogin extends Vue {
       password: this.password 
     })
     .then(res => {
+      console.log('login res --->')
+      console.log(res)
+      
       localStorage.setItem('token', res.data.access_token)
       updateHttpHeader()
 
