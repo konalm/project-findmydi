@@ -87,8 +87,6 @@ export default class CoverageItem extends Vue {
    * delete coverage
    */
   destroy() {
-    console.log('delete')
-
     httpAuth.delete(`instructors-coverage/${this.coverageItem.id}`)
       .then(() => {
         this.$emit('coverageModified');

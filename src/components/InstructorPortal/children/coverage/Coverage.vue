@@ -1,5 +1,5 @@
 <template>
-<div class="instructor-portal__coverage">
+<div class="white-modal-box instructor-portal__coverage">
   <p class="modal-box-header">Coverage</p>
 
   <coverage-item

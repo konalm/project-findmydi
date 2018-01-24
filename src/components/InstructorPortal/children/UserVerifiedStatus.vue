@@ -1,6 +1,6 @@
 <template>
-  <div class="white-modal-box__container text-center" v-if="verifiedStatus !== 1">
-    <div class="card-block p-2" v-if="!verifiedStatus">
+  <div class="white-modal-box__container text-center" v-if="!verified">
+    <div class="card-block p-2" v-if="!verified">
       <p class="card-text">
         We need a few more details before we can verify you.
       </p>
@@ -10,11 +10,11 @@
       </router-link>
     </div>
 
-    <div class="card-block p-2" v-if="verifiedStatus == 2">
+    <!-- <div class="card-block p-2" v-if="v">
       <p class="card-text">
         Verification Pending Review
       </p>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -28,7 +28,7 @@ import {Prop} from 'vue-property-decorator'
 
 @Component({})
 export default class UserVerifiedStatus extends Vue {
-  @Prop() verifiedStatus: number
+  @Prop() verified: boolean
 }
 </script>
 

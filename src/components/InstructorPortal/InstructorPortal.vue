@@ -10,7 +10,7 @@
         />
 
         <coverage
-          :coverage="user.coverages" 
+          :coverage="coverage" 
           v-on:coverageModified="getUser"  
         />
 
@@ -25,9 +25,14 @@
           v-on:newAvatarUploaded="getUser"
         />
 
-        <verification-request :verifiedStatus="user.verified" />
+        <verification-request :verified="user.verified" />
 
-        <VerificationRequirments />
+        <VerificationRequirments
+          :hourlyRate="user.hourly_rate"
+          :coverages="coverage" 
+          :avatar="user.avatar_url"
+          :verified="user.verified"
+        />
       </div>
     </div>
   </div>
@@ -61,17 +66,20 @@ import VerificationRequirments from './children/VerificationRequirments.vue'
 })
 export default class InstructorPortal extends Vue {
   profilePic: string = ''
+  coverage = []
 
   user = {
     id: '',
     firstName: '',
     surname: '',
     email: '',
+    contact_number: null,
+    hourly_rate: '',
     postcodes: '',
     radius: '',
-    verified: 0,
-    has_avatar: 0,
-    coverages: []
+    verified: false,
+    avatar_url: '',
+    coverages: {}
   }
 
   get postcodes() {
@@ -91,7 +99,7 @@ export default class InstructorPortal extends Vue {
     httpAuth.get('instructor')
       .then(res => {
         this.user = res.data
-        this.user.coverages = JSON.parse(res.data.coverages)
+        this.coverage = JSON.parse(res.data.coverages)        
       })
       .catch(err => {
         throw new Error(err)

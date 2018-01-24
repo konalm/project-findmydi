@@ -7,6 +7,16 @@
     <p>{{ fullName }} </p> 
     <P> {{ userProfile.gender }} </P>
     <p>{{ userProfile.email }}</p>
+
+    <!-- Contact Number -->
+    <p v-if="!editMode"> Contact Number: {{ userProfile.contact_number }}</p>
+
+    <p v-if="editMode">
+      Contact Number: 
+      <input type="number" class="form-group" v-model="updateContactNumber" />
+    </p>
+
+
     <p>Verified:  
       <i 
         class="fa fa-times text-danger" 
@@ -99,6 +109,7 @@ import {httpAuth} from '@/http-requests'
 @Component({})
 export default class Profile extends Vue {
   editMode: boolean = false
+  updateContactNumber: number = null
   updateHourlyRate: number = 0
   updateOffer: string = ''
 
@@ -114,6 +125,7 @@ export default class Profile extends Vue {
       first_name: '',
       surname: '',
       email: '',
+      contact_number: null,
       gender: '',
       verified: false,
       hourly_rate: 0,
@@ -140,6 +152,7 @@ export default class Profile extends Vue {
     if (!this.validate()) { return }
 
     httpAuth.put('instructors-profile', {
+      contactNumber: this.updateContactNumber,
       hourlyRate: this.updateHourlyRate,
       offer: this.updateOffer
     })
@@ -159,6 +172,7 @@ export default class Profile extends Vue {
    * 
    */
   resetUpdateProperties() {
+    this.updateContactNumber = this.userProfile.contact_number
     this.updateHourlyRate = this.userProfile.hourly_rate
     this.updateOffer = this.userProfile.offer
   }
@@ -168,6 +182,12 @@ export default class Profile extends Vue {
    */
   validate() {
     this.updateResponse.message = '' 
+
+    if (!this.updateContactNumber) {
+      this.updateResponse.valid = false
+      this.updateResponse.message = 'contact number is required'
+      return false
+    }
 
     if (!this.updateHourlyRate) {
       this.updateResponse.valid = false

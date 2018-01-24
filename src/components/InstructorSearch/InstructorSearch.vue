@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <user-header />
 
     <div class="container mt-5">
       <div class="search-page__main-container">
@@ -49,13 +49,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import Header from '@/components/patterns/user-header'
+import UserHeader from '@/components/patterns/user-header'
 import {http} from '../../http-requests'
 import noDriversResponse from './NoDriversResponse.vue'
 
 @Component({
   components: {
-    Header,
+    UserHeader,
     noDriversResponse
   }
 })
