@@ -5,9 +5,15 @@
         We need a few more details before we can verify you.
       </p>
 
-      <router-link to="/verification-form">
+      <!-- <router-link to="/verification-form">
         <button class="warning">Get Verified!</button>
-      </router-link>
+      </router-link> -->
+
+      <button class="warning" 
+        v-on:click="$emit('uploadAdiLicence')"
+      >
+        Get Verified!
+      </button>
     </div>
 
     <!-- <div class="card-block p-2" v-if="v">
@@ -29,6 +35,10 @@ import {Prop} from 'vue-property-decorator'
 @Component({})
 export default class UserVerifiedStatus extends Vue {
   @Prop() verified: boolean
+
+  uploadAdiLicence() {
+
+  }
 }
 </script>
 

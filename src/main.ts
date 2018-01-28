@@ -5,6 +5,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+// import * as $ from 'jquery';
+// window['jQuery'] = window['$'] = $;
+
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

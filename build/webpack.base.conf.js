@@ -1,13 +1,25 @@
+var webpack = require('webpack')
 var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+const jquery = require('jquery')
+
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
 module.exports = {
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jquery: 'jquery',
+      'window.jQuery': 'jquery',
+      jQuery: 'jquery'
+    }),
+  ],
+
   entry: {
     app: './src/main.ts'
   },

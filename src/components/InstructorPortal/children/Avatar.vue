@@ -162,15 +162,11 @@ export default class InstructorAvatar extends Vue {
   padding-left: 80px;
 }
 
-
-
 .avatar-container {
-  // border: 1px solid green;
    padding-top: 10px;
 }
 
 img.avatar-img {
-  // border: 1px solid red;
   margin: 0 auto;
 }
 </style>
