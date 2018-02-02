@@ -27,6 +27,7 @@
 
       <verification-request 
         :verified="user.verified"
+        :verifiedStatus="user.adi_licence_verification"
         v-on:uploadAdiLicence="showUploadAdiLicence()"
       />
 
@@ -39,9 +40,9 @@
     </div>
   </div>
 
-  <adi-licence-upload />
-
-
+  <adi-licence-upload 
+    v-on:adiLicenceUploaded="getUser" 
+  />
 </div>
 </template>
 
@@ -72,7 +73,7 @@ import VerificationRequirments from './children/VerificationRequirments.vue'
     AdiLicenceUpload,
     Coverage,
     Stats,
-    VerificationRequirments
+    VerificationRequirments,
   }
 })
 export default class InstructorPortal extends Vue {
@@ -90,7 +91,8 @@ export default class InstructorPortal extends Vue {
     radius: '',
     verified: false,
     avatar_url: '',
-    coverages: {}
+    coverages: {},
+    adi_licence_verification: null
   }
 
   get postcodes() {
@@ -99,8 +101,10 @@ export default class InstructorPortal extends Vue {
     return this.user.postcodes.split(",");
   }
 
+  /**
+   * show open upload adi licence modal box 
+   */
   showUploadAdiLicence() {
-    console.log('show upload adi licence')
     $("#myModal").modal()
   }
 
@@ -120,15 +124,6 @@ export default class InstructorPortal extends Vue {
       .catch(err => {
         throw new Error(err)
       })
-  }
-
-  /** 
-   * 
-   */
-  openAdiLicence() {
-    console.log('open adi licence')
-
-
   }
 }
 </script>

@@ -1,19 +1,22 @@
 <template>
-  <div class="container">
-    <h3 class="text-center"> Instructor Verifications To Review </h3>
+  <div>
+    <super-admin-header /> 
 
-    <ul class="mt-5 list-group">
-      <instructor 
-        v-for="instructor in instructorsInReview"
-        :key="instructor.id"
-        :instructor="instructor"
-        v-on:instructor-verification-updated="getInstructorsInReview"
-      />
+    <div class="container">
 
-      <p v-if="instructorsInReview.length === 0" class="lead">
-        No Instructors In Review
-      </p>
-    </ul>
+      <ul class="mt-5 list-group instructors-in-review">
+        <instructor 
+          v-for="instructor in instructorsInReview"
+          :key="instructor.id"
+          :instructor="instructor"
+          v-on:updatedInstructorAdiLicence="getInstructorsInReview"
+        />
+
+        <p v-if="instructorsInReview.length === 0" class="lead">
+          No Instructors In Review
+        </p>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -24,11 +27,12 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import {httpAuth} from '@/http-requests'
 import {getApiUrl} from '@/globals'
-import Instructor from './children/Instructor.vue'
-
+import SuperAdminHeader from '@/components/patterns/SuperAdminHeader.vue'
+import Instructor from './children/Instructor'
 
 @Component({
   components: {
+    SuperAdminHeader,
     Instructor
   }
 })
@@ -40,14 +44,14 @@ export default class HandleUserVerification extends Vue {
   }
 
   /**
-   * 
+   * get instructors with adi licence photo in review status
    */
   getInstructorsInReview() {
-    console.log('get instructors in review')
-    
-    httpAuth.get('users-verification-credentials')
+    httpAuth.get('instructors-in-review')
       .then(res => {
         this.instructorsInReview = res.data
+
+        console.log(res.data)
       })
       .catch(err => {
         throw new Error(err)
@@ -56,3 +60,10 @@ export default class HandleUserVerification extends Vue {
 }
 </script>
 
+
+
+<style lang="scss" scoped>
+  ul.instructors-in-review {
+    margin-top: 70px;
+  }
+</style>

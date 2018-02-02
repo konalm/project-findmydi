@@ -30,7 +30,7 @@
       </div>
 
       <div class="form-group">
-        {{ response }}
+        {{ errorMessage }}
       </div>
     </form>
   </div>
@@ -42,14 +42,14 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import cookies from 'js-cookie'
-import {httpAuth} from '@/http-requests'
+import {httpAuth, updateHttpHeader} from '@/http-requests'
 import router from '@/router'
 
 @Component({})
 export default class SuperAdminLogin extends Vue {
   username: string = ''
   password: string = ''
-  response: string = ''
+  errorMessage: string = ''
 
   /**
    * super username and password to api for verification
@@ -62,10 +62,10 @@ export default class SuperAdminLogin extends Vue {
       password: this.password
     })
       .then(res => {
-        cookies.set('findmydi_token', res.data.access_token)
-        this.$store.commit('setAccessToken', res.data.access_token)
+        localStorage.setItem('token', res.data.access_token)
+        updateHttpHeader()
 
-        router.push({name: 'InstructorPortal'})
+        router.push({name: 'InstructorAdiReviews'})
       })
       .catch(err => {
         throw new Error(err)
@@ -76,15 +76,15 @@ export default class SuperAdminLogin extends Vue {
    * validate all inputs where entered 
    */
   validation() {
-    this.response = ''
+    this.errorMessage = ''
 
     if (!this.username) {
-      this.response = 'enter username'
+      this.errorMessage = 'enter username'
       return false
     }
 
     if (!this.password) {
-      this.response = 'enter password'
+      this.errorMessage = 'enter password'
       return false
     }
 

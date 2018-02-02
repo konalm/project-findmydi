@@ -117,6 +117,7 @@ export default class AdiLicenceUpload extends Vue {
     httpAuth.post('instructor-adi-licence-upload', data)
       .then(res => {
         this.successUpload = true
+        this.$emit('adiLicenceUploaded')
       })
       .catch(err => {
         this.apiResponseMessage = err.response.data 

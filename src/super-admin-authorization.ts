@@ -3,14 +3,12 @@ import router from '@/router'
 import store from '@/store'
 
 const superAdminAuthCheck = (to, from, next) => {
-  httpAuth.get('/super-admin')
+  httpAuth.get('/super-admin-auth')
     .then(res => {
-      console.log('SA all good')
       store.commit('setUser', res.data)
       next()
     })
     .catch(err => {
-      console.log('catch SA auth')
       router.push({name: 'SuperAdminLogin'}) 
     })
 }

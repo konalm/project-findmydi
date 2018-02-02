@@ -58,8 +58,8 @@ export default new Router({
       component: SuperAdminLogin,
     },
     {
-      path: '/handle-instructor-verification',
-      name: 'HandleUserVerification',
+      path: '/instructor-adi-reviews',
+      name: 'InstructorAdiReviews',
       component: HandleUserVerification,
       beforeEnter: SuperAdminAuth
     }

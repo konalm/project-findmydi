@@ -30,7 +30,9 @@
               >
             </div>
 
-            <p class="text-danger" v-if="errorMessage">{{ errorMessage }}</p> 
+            <p class="text-danger" v-if="errorMessage">
+              {{ errorMessage }}
+            </p> 
 
             <div class="form-row">
               <button type="submit" class="form">Sign Me In</button>
@@ -64,6 +66,7 @@ export default class InstructorLogin extends Vue {
   email: string = ''
   password: string = ''
   errorMessage: string = ''
+  userType: number = 1
   
   /**
    * submit email and password to api for credential check
@@ -77,9 +80,6 @@ export default class InstructorLogin extends Vue {
       password: this.password 
     })
     .then(res => {
-      console.log('login res --->')
-      console.log(res)
-      
       localStorage.setItem('token', res.data.access_token)
       updateHttpHeader()
 
