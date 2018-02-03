@@ -16,16 +16,27 @@
     <!-- Rejected -->
     <div class="card-block p-2" v-if="verifiedStatus === '0'">
       <p class="card-text">
-        Your ADI licence was rejected for the following reason;
-
-        <span class="sub-card-text"> </span>
+        Your ADI licence was rejected!
       </p>
 
-      <button class="warning" 
-        v-on:click="$emit('uploadAdiLicence')"
-      >
-        Reupload ADI Licence
-      </button>
+      <p class="card-text sub-text" v-if="showRejectReason">
+        {{ rejectReason }}
+      </p>
+
+      <div class="button-container">
+        <button class="base-button blue" v-on:click="toggleRejectReason()">
+          <span v-if="!showRejectReason">View Reason</span> 
+          <span v-if="showRejectReason">Hide Reason</span>
+        </button>
+
+        <div class="spacer"></div>
+
+        <button class="base-button" 
+          v-on:click="$emit('uploadAdiLicence')"
+        >
+          Reupload ADI Licence
+        </button>
+      </div>
     </div>
 
     <!-- Pending Review -->
@@ -47,8 +58,15 @@ import {Prop} from 'vue-property-decorator'
 
 @Component({})
 export default class UserVerifiedStatus extends Vue {
+  showRejectReason: boolean  = false
+
   @Prop() verified: boolean
   @Prop() verifiedStatus: string
+  @Prop() rejectReason: string 
+
+  toggleRejectReason() {
+    this.showRejectReason = !this.showRejectReason
+  }
 
   uploadAdiLicence() {
 
@@ -64,6 +82,25 @@ p.card-text {
   &.pending-review {
     margin-bottom: 15px;
     margin-top: 15px;
+  }
+}
+
+p.card-text.sub-text {
+  color: rgb(140,140,140);
+  font-size: 14px;
+}
+
+.button-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  .spacer {
+    width: 20px;
+  }
+
+  button {
+    width: 40%;
   }
 }
 </style>

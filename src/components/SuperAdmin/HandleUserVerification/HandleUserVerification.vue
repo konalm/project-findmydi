@@ -12,7 +12,7 @@
           v-on:updatedInstructorAdiLicence="getInstructorsInReview"
         />
 
-        <p v-if="instructorsInReview.length === 0" class="lead">
+        <p v-if="instructorsInReview.length === 0" class="lead text-center">
           No Instructors In Review
         </p>
       </ul>

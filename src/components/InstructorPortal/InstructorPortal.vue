@@ -28,6 +28,7 @@
       <verification-request 
         :verified="user.verified"
         :verifiedStatus="user.adi_licence_verification"
+        :rejectReason="user.adi_licence_reject_reason"
         v-on:uploadAdiLicence="showUploadAdiLicence()"
       />
 
@@ -92,7 +93,8 @@ export default class InstructorPortal extends Vue {
     verified: false,
     avatar_url: '',
     coverages: {},
-    adi_licence_verification: null
+    adi_licence_verification: null,
+    adi_licence_reject_reason: null
   }
 
   get postcodes() {
@@ -119,7 +121,9 @@ export default class InstructorPortal extends Vue {
     httpAuth.get('instructor')
       .then(res => {
         this.user = res.data
-        this.coverage = JSON.parse(res.data.coverages)        
+        this.coverage = JSON.parse(res.data.coverages)    
+        
+        console.log(res.data)
       })
       .catch(err => {
         throw new Error(err)

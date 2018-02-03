@@ -5,7 +5,7 @@
         <img v-bind:src="avatarPhotoSrc" class="avatar" />
       </div>
 
-      <div clas="profile">
+      <div class="profile">
         <p>{{ instructor.id }}</p>
         <p>{{ name }}</p>
         <p>{{ instructor.email }}</p>
@@ -21,7 +21,7 @@
 
     <div class="button-container">
       <button class="btn btn-success mt-2" 
-        v-on:click="updateAdiLicenceStatus(0)"
+        v-on:click="updateAdiLicenceStatus(1)"
       >
         Approve
       </button>
@@ -29,11 +29,14 @@
       <button class="btn btn-danger mt-2"
         v-on:click="openRejectReasonModal()"
       >
-        Decline
+        Reject
       </button>
     </div>
 
-    <reject-reason-modal />
+    <reject-reason-modal  
+      :instructorAdiLicenceId="this.instructor.adi_licence_id"
+      v-on:rejectedAdiLicence="$emit('updatedInstructorAdiLicence')"
+    />
   </li>
 </template>
 
@@ -76,22 +79,6 @@ export default class InstructorInReview extends Vue {
   }
 
   /**
-   * update instructor verification to 1 (verified)
-   */
-  verifyInstructor() {
-    httpAuth.put(`instructor-verification/${this.instructor.id}`, {
-      status: 1
-    })
-      .then(res => {
-        console.log('instructor verified')
-        this.$emit('instructor-verification-updated')
-      })
-      .catch(err => {
-        throw new Error(err)
-      })
-  }
-
-  /**
    * update adi licence to approved or rejected 
    */
   updateAdiLicenceStatus(status) {
@@ -111,9 +98,7 @@ export default class InstructorInReview extends Vue {
    * 
    */
   openRejectReasonModal() {
-    console.log('open reject reason modal')
     $("#rejectReasonModal").modal()
-
   }
 }
 </script>
