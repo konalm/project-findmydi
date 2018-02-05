@@ -36,7 +36,8 @@
         :hourlyRate="user.hourly_rate"
         :coverages="coverage" 
         :avatar="user.avatar_url"
-        :verified="user.verified"
+        :adiLicenceVerified="user.adi_licence_verification"
+        v-if="!user.verified"
       />
     </div>
   </div>
@@ -122,8 +123,6 @@ export default class InstructorPortal extends Vue {
       .then(res => {
         this.user = res.data
         this.coverage = JSON.parse(res.data.coverages)    
-        
-        console.log(res.data)
       })
       .catch(err => {
         throw new Error(err)
