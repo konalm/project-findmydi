@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import LandingPage from '@/components/LandingPage.vue'
-import InstructorSearch from '@/components/InstructorSearch'
-import InstructorSearchResponse from '@/components/InstructorSearchResponsea'
+import Home from '@/components/Home'
+import Search from '@/components/Search'
 import InstructorLogin from '@/components/InstructorLogin'
 import InstructorSignUp from '@/components/InstructorSignUp'
 import InstructorPortal from '@/components/InstructorPortal'
@@ -22,13 +22,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'InstructorSearch',
-      component: InstructorSearch
+      name: 'Home',
+      component: Home
     },
     {
       path: '/search/:postcode',
-      name: 'InstructorSearchResponse',
-      component: InstructorSearchResponse
+      name: 'Search',
+      component: Search
     },
     {
       path: '/login',

@@ -50,8 +50,6 @@ export default class HandleUserVerification extends Vue {
     httpAuth.get('instructors-in-review')
       .then(res => {
         this.instructorsInReview = res.data
-
-        console.log(res.data)
       })
       .catch(err => {
         throw new Error(err)

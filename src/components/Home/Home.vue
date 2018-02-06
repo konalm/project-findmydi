@@ -52,6 +52,7 @@ import Component from 'vue-class-component'
 import UserHeader from '@/components/patterns/user-header'
 import {http} from '../../http-requests'
 import noDriversResponse from './NoDriversResponse.vue'
+import router from '@/router'
 
 @Component({
   components: {
@@ -69,18 +70,14 @@ export default class InstructorSearch extends Vue {
    * submit search to api the find instructor covering entered postcode
    */
   searchForInstructors() {
-    http.get(`search-instructors/${this.postcode}`)
-      .then(res => {
-        this.instructorsFound = res.data
-        this.searched = true
-      })
-      .catch(err => { 
-        throw new Error(err) 
-      })
-
+    router.push({
+      name: 'Search', 
+      params: {postcode: this.postcode}}
+    )
   }
 }
 </script>
 
 
-<style lang="scss" scoped src="./instructor-search.scss" />
+
+<style lang="scss" scoped src="./home.scss" />
