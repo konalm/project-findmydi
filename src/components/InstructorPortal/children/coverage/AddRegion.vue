@@ -7,8 +7,8 @@
         </button>
       </div>
 
-      <p class="region-text">Enter region with your city or another you wish to instructor your 
-        student.
+      <p class="region-text">Enter region with your city or another you wish to 
+        instructor your student.
       </p>
 
       <!-- region search -->
