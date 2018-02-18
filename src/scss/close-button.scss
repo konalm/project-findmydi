@@ -1,0 +1,22 @@
+button.close-button {
+  background: #EF7676;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 30px;
+  line-height: 0;
+  color: rgba(0,0,0,0.5);
+  cursor: pointer;
+
+  .material-icons {
+    font-size: 30px;
+  }
+}
+
+button.close-button.small {
+  padding: 2px;
+
+  .material-icons {
+    font-size: 22px;
+  }
+}

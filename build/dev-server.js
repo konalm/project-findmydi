@@ -5,6 +5,8 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
 
+var https = require('https')
+var fs = require('fs')
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
@@ -70,6 +72,7 @@ var readyPromise = new Promise(resolve => {
 })
 
 console.log('> Starting dev server...')
+
 devMiddleware.waitUntilValid(() => {
   console.log('> Listening at ' + uri + '\n')
   // when env is testing, don't need open it
@@ -80,6 +83,13 @@ devMiddleware.waitUntilValid(() => {
 })
 
 var server = app.listen(port)
+
+var options = {
+  key: fs.readFileSync(__dirname + '/dev.findmydi.key', 'utf8'),
+  cert: fs.readFileSync(__dirname + '/dev.findmydi.crt', 'utf8')
+};
+
+// var server = https.createServer(options, app).listen(3000);
 
 module.exports = {
   ready: readyPromise,

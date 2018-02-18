@@ -5,8 +5,20 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-// import * as $ from 'jquery';
-// window['jQuery'] = window['$'] = $;
+import jsonp from './googleapis/jsonp'
+import location from './googleapis/location'
+
+var gapiurl = '//maps.googleapis.com/maps/api/js?callback=__googleMapsApiOnLoadCallback';
+
+var load = function (done) {
+    console.log('load')
+    jsonp(gapiurl, '__googleMapsApiOnLoadCallback', done);
+};
+
+load( function () {
+    console.log('location init')
+    location.init();
+});
 
 
 Vue.config.productionTip = false

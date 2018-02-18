@@ -17,7 +17,6 @@ body {
   height: 100%;
 }
 
-
 button.base-button {
   background: #2EA663;
   color: white;
@@ -78,9 +77,15 @@ button.large-button {
   padding-bottom: 10px;
 }
 
+button.padded-button {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 
 @import './form.scss';
 @import './message-container.scss';
 @import './white-modal-box.scss';
 @import './header.scss';
 @import './modal-box.scss';
+@import './close-button.scss';

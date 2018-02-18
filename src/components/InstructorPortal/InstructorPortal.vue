@@ -1,5 +1,8 @@
 <template>
 <div class="portal-page">
+
+  <!-- <div id="map-canvas"></div> -->
+  
   <InstructorHeader :loggedIn="true" />
   
   <div class="container mt-5 instructor-portal">
@@ -53,8 +56,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-
-
+import axios from 'axios'
 import {httpAuth} from '../../http-requests'
 import Avatar from './children/Avatar.vue'
 import VerificationRequest from './children/UserVerifiedStatus.vue'
@@ -64,6 +66,8 @@ import Profile from './children/Profile.vue'
 import Coverage from './children/coverage'
 import Stats from './children/Stats.vue'
 import VerificationRequirments from './children/VerificationRequirments.vue'
+
+import location from '../../googleapis/location'
 
 
 @Component({
@@ -111,9 +115,17 @@ export default class InstructorPortal extends Vue {
     $("#myModal").modal()
   }
 
+
   beforeMount() {
     this.getUser()
   }
+
+  mounted() {
+    console.log('after mount');
+    // location.init()
+  }
+
+
 
   /**
    * get instructor from the api

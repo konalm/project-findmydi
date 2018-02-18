@@ -1,47 +1,29 @@
 <template>
 <div class="instructor-portal__add-coverage">
-  <div class="white-modal-box__container" v-if="addCoverage">
-    <p>Add Your postcode, or postcode you wish to instruct your lessons</p> 
-
-    <input type="text" class="form-group" placeholder="postcode"
-      v-model="postcode" 
-    />
-
-    <p>How far are you willing to travel to your learner drivers ?</p> 
-
-    <input type="number" class="form-group" placeholder="range" 
-      v-model="range" 
-    />
-
-    <p class="api-response mt-3" v-if="addResponse.message"
-      v-bind:class="[
-        {'text-success': addResponse.valid},
-        {'text-danger' : !addResponse.valid}
-      ]"
-    >
-      {{ addResponse.message }}
-    </p>
-  </div>
-
+  <add-coverage-choice
+    v-on:selectCoverageType="selectCoverageType" 
+    v-on:close="toggleAdd()"
+    v-if="chooseCoverage && addCoverage"
+  />
+ 
   <button class="base-button green large-button" 
     v-if="!addCoverage"
     v-on:click="toggleAdd()"
   > 
-    <i class="fa fa-plus" aria-hidden="true"></i> 
-    Postcode 
+    <i class="fa fa-plus" aria-hidden="true"></i>  Coverage
   </button>
 
-  <div class="button-container" v-if="addCoverage">
-    <button class="base-button blue" v-on:click="toggleAdd()">
-      Cancel
-    </button>
+  <add-postcode 
+    v-if="addPostcodeCoverage" 
+    v-on:close="close()" 
+    v-on:newCoverageAdded="$emit('newCoverageAdded')" 
+  />
 
-    <div class="spacer"></div>
-
-    <button class="base-button" v-on:click="addNewCoverage()">
-      Add New Postcode 
-    </button>
-  </div>
+  <add-region 
+    v-if="addRegionCoverage" 
+    v-on:close="close()" 
+    v-on:newCoverageAdded="$emit('newCoverageAdded')"     
+  />
 </div>
 </template>
 
@@ -51,10 +33,23 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import {httpAuth} from '@/http-requests'
+import AddCoverageChoice from './AddCoverageChoice.vue'
+import AddPostcode from './AddPostcode.vue'
+import AddRegion from './AddRegion.vue'
 
-@Component({})
+
+@Component({
+  components: {
+    AddCoverageChoice,
+    AddPostcode,
+    AddRegion
+  }
+})
 export default class AddCoverage extends Vue {
   addCoverage: boolean = false
+  chooseCoverage: boolean = false
+  addPostcodeCoverage: boolean = false 
+  addRegionCoverage: boolean = false
   postcode: string = ''
   range: number = null
   addResponse = { valid: false, message: '' }
@@ -64,6 +59,7 @@ export default class AddCoverage extends Vue {
    */
   toggleAdd() {
     this.addCoverage = !this.addCoverage
+    this.chooseCoverage = !this.chooseCoverage
 
     if (!this.addCoverage) {
       this.addResponse.message = ''
@@ -93,6 +89,37 @@ export default class AddCoverage extends Vue {
         this.addResponse.message = err.response.data
       })
   }
+
+
+  /**
+   * select type of coverage to be added in UI 'Postcode' or 'Region'
+   */
+  selectCoverageType(type) {
+    console.log('select coverage type')
+    console.log(type)
+    
+    switch (type) {
+      case 'postcode':
+        this.addPostcodeCoverage = true 
+        break
+      case 'region':
+        this.addRegionCoverage = true
+        break
+    }
+
+    this.chooseCoverage = false
+  }
+
+  /** 
+   * 
+   */
+  close() {
+    this.addCoverage = false
+    this.chooseCoverage = false
+    this.addPostcodeCoverage = false
+    this.addRegionCoverage = false
+  }
+
 
   /**
    * validate user inputs 

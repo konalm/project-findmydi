@@ -2,18 +2,20 @@
   <div>
     <user-header />
 
+    <div id="map-canvas"></div>
+
     <div class="container mt-5">
       <div class="search-page__main-container">
         <h1>Find My Driving Instructor</h1>
 
         <form v-on:submit.prevent="searchForInstructors()">
           <div class="search-container">
-            <input 
-              type="text" 
+            <input type="text" 
               class="form-control"
               placeholder="Enter Your postcode"
               v-model="postcode"
             >
+
             <button type="submit" class="base-button">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button> 
@@ -41,6 +43,33 @@
         v-if="searched && Object(instructorsFound).length === 0" 
       />
     </div>
+
+      
+    <label>Street
+      <input type="text" id="street" name="street" />
+    </label>
+
+    <label>Locality
+      <input type="text" id="locality" name="locality" />
+    </label>
+
+    <label>Region
+      <input type="text" id="region" name="region" />
+    </label>
+
+    <label>Country
+      <input type="text" id="country" name="country" />
+    </label>
+
+    <label>Latitude
+      <input type="text" id="latitude" name="latitude" />
+    </label>
+
+    <label>Longitude
+      <input type="text" id="longitude" name="longitude" />
+    </label>
+
+    <button v-on:click="changeLocation()">Change location</button>
   </div>
 </template>
 
@@ -54,6 +83,9 @@ import {http} from '../../http-requests'
 import noDriversResponse from './NoDriversResponse.vue'
 import router from '@/router'
 
+// import location from '../../googleapis/location'
+import store from '@/store'
+
 @Component({
   components: {
     UserHeader,
@@ -65,6 +97,32 @@ export default class InstructorSearch extends Vue {
   searched: boolean = false
   searchResponse = []
   instructorsFound = []
+  x: boolean = false
+
+  beforeMount() {
+    const latitude = 52.4892259301627;
+    const longitude = -1.93615833563884;
+
+    // store.commit('setGoogleapisLocation', {long: longitude, lat: latitude})  
+    // location.init()
+
+    // location.init(latitude, longitude)
+  }
+
+  changeLocation() {
+    console.log('change location');
+
+    const latitude = this.x === true ? 52.4892259301627 : 0
+    const longitude = this.x === true ? -1.93615833563884 : 0
+    this.x = !this.x
+
+    console.log(latitude)
+    console.log(longitude)
+    console.log(typeof(latitude))
+
+    store.commit('setGoogleapisLocation', {long: longitude, lat: latitude})  
+    // location.init()
+  }
 
   /**
    * submit search to api the find instructor covering entered postcode

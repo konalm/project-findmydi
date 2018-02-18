@@ -8,7 +8,9 @@ Vue.use(Vuex)
  */
 const state = {
   user: {},
-  accessToken: ''
+  accessToken: '',
+  googleapisLocation: {long: 0, lat: 0},
+  googleapisRadius: 0
 }
 
 /**
@@ -16,7 +18,9 @@ const state = {
  */
 const getters = {
   user: state => state.user,
-  accessToken: state => state.accessToken
+  accessToken: state => state.accessToken,
+  googleapisLocation: state => state.googleapisLocation,
+  googleapisRadius: state => state.googleapisRadius
 }
 
 /**
@@ -24,7 +28,9 @@ const getters = {
  */
 const mutations = {
   setUser: (state, payload) => { state.user = payload },
-  setAccessToken: (state, payload) => { state.accessToken = payload }
+  setAccessToken: (state, payload) => { state.accessToken = payload },
+  setGoogleapisLocation: (state, payload) => { state.googleapisLocation = payload },
+  setGoogleapisRadius: (state, payload) => { state.googleapisRadius = payload * 1609.34 }
 }
 
 export default new Vuex.Store({

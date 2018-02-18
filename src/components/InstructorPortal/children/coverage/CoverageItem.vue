@@ -1,7 +1,17 @@
 <template>
 <div class="white-modal-box__container">
+
+  <!-- {{ coverageItem }} -->
+
   <div v-if="!editMode">
-    <p>Postcode: {{ coverageItem.postcode }} </p> 
+    <p v-if="coverageItem.coverage_type === 'postcode'">
+      Postcode: {{ coverageItem.postcode }} 
+    </p> 
+
+    <p v-if="coverageItem.coverage_type === 'region'">
+      Region: {{ coverageItem.region }}
+    </p>
+
     <p>Range: {{ coverageItem.range }} </p>
   </div>
 
@@ -53,7 +63,7 @@ export default class CoverageItem extends Vue {
   updateRange: number = null 
   errorMessage: string = ''
 
-  @Prop() coverageItem: {id, postcode, range}
+  @Prop() coverageItem: {id, postcode, range, coverage_type}
 
   /**
    * toggle edit mode true/false for UI
