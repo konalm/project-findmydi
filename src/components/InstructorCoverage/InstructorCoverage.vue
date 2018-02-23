@@ -64,6 +64,8 @@ export default class InstructorCoverage extends Vue {
   beforeMount() {
     this.getUser()
   }
+  
+
 
   /**
    * 

@@ -1,8 +1,12 @@
 <template>
-<div class="white-modal-box">
-  <p class="modal-box-header">Avatar</p>
+<div class="modal-box">
 
-  <div class="white-modal-box__container avatar-upload">
+   <div class="modal-box__header">
+    Profile Picture
+    <i class="fa fa-edit"></i>
+  </div>
+
+  <div class="modal-box__body avatar-upload">
     <form 
       enctype="multipart/form-data"
       novalidate
@@ -12,17 +16,14 @@
         <img v-if="!user.avatar_url"
           src="../../../assets/profilePic.jpg"
           alt="profile-pic" 
-          class="img-thumbnail"
-          width="400px" 
-          height="400px"
+          width="300px" 
         />
 
         <img v-if="user.avatar_url"
           v-bind:src="avatarImgSrc"
           alt="profile-pic" 
-          class="img-thumbnail avatar-img"
-          width="400px" 
-          height="400px"
+          class="avatar-img"
+          width="300px" 
         />
       </div>
 
@@ -34,7 +35,7 @@
           v-bind:class="{'update-upload': user.avatar_url}"
         >
           <p v-if="!user.avatar_url">Upload a Profile Picture</p>
-          <p v-if="user.avatar_url">Update</p>
+          <!-- <p v-if="user.avatar_url">Update</p> -->
         </label> 
 
         <input 
@@ -125,48 +126,53 @@ export default class InstructorAvatar extends Vue {
 
 
 <style scoped lang="scss">
-.white-modal-box__container.avatar-upload {
-  input.file-upload {
-    display: none;
+  .modal-box {
+    width: 80%;
+    margin-left: 50px;
   }
 
-  label.custom-avatar {
-    background: #2EA663;
-    color: white; 
-    padding: 7px 15px 7px 15px;
-    border-radius: 5px;
-    cursor: pointer;
+  .modal-box__body.avatar-upload {
+    input.file-upload {
+      display: none;
+    }
 
-    p {
-      margin: 0;
+    label.custom-avatar {
+      background: #2EA663;
+      color: white; 
+      padding: 7px 15px 7px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+
+      p {
+        margin: 0;
+      }
+    }
+    
+    label.custom-avatar.update-upload {
+      background: none;
+      color: #2EA663;;
+      font-size: 12px;
+      padding: 0;
+      text-align: left;
+      text-decoration: underline;
+    }
+
+    &.avatar-upload {
+      padding: 0;
+      text-align: center;
     }
   }
-  
-  label.custom-avatar.update-upload {
-    background: none;
-    color: #2EA663;;
-    font-size: 12px;
-    padding: 0;
+
+  .update-upload-container {
     text-align: left;
-    text-decoration: underline;
+    padding-left: 80px;
   }
 
-  &.avatar-upload {
-    padding: 0;
-    text-align: center;
+  .avatar-container {
+    padding-top: 40px;
   }
-}
 
-.update-upload-container {
-  text-align: left;
-  padding-left: 80px;
-}
-
-.avatar-container {
-   padding-top: 10px;
-}
-
-img.avatar-img {
-  margin: 0 auto;
-}
+  img.avatar-img {
+    margin: 0 auto;
+  }
 </style>

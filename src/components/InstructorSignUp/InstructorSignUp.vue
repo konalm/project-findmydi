@@ -1,6 +1,6 @@
 <template>
   <div>
-    <instructor-header
+    <logged-out-header
       :loggedIn="false" 
     />
 
@@ -111,13 +111,13 @@ import Component from 'vue-class-component'
 import {http} from '../../http-requests'
 import signUpSuccess from './SignUpSuccess.vue'
 
-import InstructorHeader from '@/components/patterns/instructor-header'
+import LoggedOutHeader from '@/components/patterns/logged-out-header'
 
 
 @Component({
   components: {
     signUpSuccess,
-    InstructorHeader
+    LoggedOutHeader
   }
 })
 export default class InstructorSignUp extends Vue {

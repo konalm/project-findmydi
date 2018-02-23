@@ -1,9 +1,8 @@
 <template>
 <div class="portal-page">
-
-  <!-- <div id="map-canvas"></div> -->
-  
-  <InstructorHeader :loggedIn="true" />
+  <inst-app-header :loggedIn="true" />
+  <page-header :header="'Profile'" />
+  <inst-app-navbar />
   
   <div class="container mt-5 instructor-portal">
     <div class="instructor-portal__left-side">
@@ -12,12 +11,12 @@
         v-on:profileUpdated="getUser"
       />
 
-      <coverage
+      <!-- <coverage
         :coverage="coverage" 
         v-on:coverageModified="getUser"  
-      />
+      /> -->
 
-      <stats />
+      <!-- <stats /> -->
     </div>
 
     <div class="spacer"></div>
@@ -60,7 +59,9 @@ import axios from 'axios'
 import {httpAuth} from '../../http-requests'
 import Avatar from './children/Avatar.vue'
 import VerificationRequest from './children/UserVerifiedStatus.vue'
-import InstructorHeader from '@/components/patterns/instructor-header'
+import InstAppHeader from '@/components/patterns/InstAppHeader'
+import PageHeader from '@/components/patterns/PageHeader.vue'
+import InstAppNavbar from '@/components/patterns/InstAppNavbar.vue'
 import AdiLicenceUpload from './children/AdiLicenceUpload'
 import Profile from './children/Profile.vue'
 import Coverage from './children/coverage'
@@ -74,7 +75,9 @@ import location from '../../googleapis/location'
   components: {
     Avatar,
     VerificationRequest,
-    InstructorHeader,
+    InstAppHeader,
+    PageHeader,
+    InstAppNavbar,
     Profile,
     AdiLicenceUpload,
     Coverage,
@@ -119,12 +122,6 @@ export default class InstructorPortal extends Vue {
   beforeMount() {
     this.getUser()
   }
-
-  mounted() {
-    console.log('after mount');
-    // location.init()
-  }
-
 
 
   /**

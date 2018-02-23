@@ -7,6 +7,7 @@ import Search from '@/components/Search'
 import InstructorLogin from '@/components/InstructorLogin'
 import InstructorSignUp from '@/components/InstructorSignUp'
 import InstructorPortal from '@/components/InstructorPortal'
+import InstAppCoverage from '@/components/InstAppCoverage'
 import InstructorVerfication from '@/components/InstructorVerificationForm'
 import InstructorCoverage from '@/components/InstructorCoverage'
 
@@ -42,9 +43,15 @@ export default new Router({
       component: InstructorSignUp
     },
     {
-      path: '/portal',
+      path: '/profile',
       name: 'InstructorPortal',
       component: InstructorPortal,
+      beforeEnter: Auth
+    },
+    {
+      path: '/areas-you-cover',
+      name: 'InstAppCoverage',
+      component: InstAppCoverage,
       beforeEnter: Auth
     },
     {

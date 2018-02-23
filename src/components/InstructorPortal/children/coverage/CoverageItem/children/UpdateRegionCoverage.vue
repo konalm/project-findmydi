@@ -61,9 +61,6 @@ export default class UpdateRegionCoverage extends Vue {
       .then(res => {
         geometry = res.data.geometry.location
 
-        console.log('geometry ---->')
-        console.log(geometry)
-
         return httpAuth.put(`instructor-region-coverages/${this.coverageItem.id}`, {
           region: this.updateRegion,
           range: this.updateRange,

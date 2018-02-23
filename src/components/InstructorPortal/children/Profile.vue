@@ -1,8 +1,11 @@
 <template>
-<div class="white-modal-box">
-  <p class="modal-box-header">Profile</p>
+<div class="modal-box">
+  <div class="modal-box__header">
+    Your Details
+    <i class="fa fa-edit"></i>
+  </div>
 
-  <div class="white-modal-box__container">
+  <div class="modal-box__body">
     <p>ADI No: {{ userProfile.adi_license_no }}</p>
     <p>{{ fullName }} </p> 
     <P> {{ userProfile.gender }} </P>
@@ -15,7 +18,6 @@
       Contact Number: 
       <input type="number" class="form-group" v-model="updateContactNumber" />
     </p>
-
 
     <p>Verified:  
       <i 
@@ -59,12 +61,12 @@
     </textarea>
 
     <div class="white-modal-box__button-container" v-if="!editMode">
-      <button 
+      <!-- <button 
         class="small blue"
         v-on:click="toggleEditMode()"
       >
         edit 
-      </button>
+      </button> -->
     </div>
 
     <div class="white-modal-box__button-container" v-if="editMode">

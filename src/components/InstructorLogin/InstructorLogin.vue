@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <instructor-header
+    <logged-out-header
       :loggedIn="false" 
     />
 
@@ -54,12 +54,12 @@ import {httpAuth, updateHttpHeader} from '@/http-requests'
 
 import router from '@/router'
 
-import InstructorHeader from '@/components/patterns/instructor-header'
+import LoggedOutHeader from '@/components/patterns/logged-out-header'
 
 
 @Component({
   components: {
-    InstructorHeader
+    LoggedOutHeader
   }
 })
 export default class InstructorLogin extends Vue {
