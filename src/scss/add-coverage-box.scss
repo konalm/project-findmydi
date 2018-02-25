@@ -1,0 +1,22 @@
+.add-coverage-box {
+  background: white;
+  width: 176px;
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 19px;
+  color: #6F6F6F;
+  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+
+  .spacer {
+    width: 15px;
+  }
+
+  .fa {
+    color: $primary-color;
+    font-size: 28px;
+  }
+}

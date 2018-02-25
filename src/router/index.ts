@@ -6,16 +6,16 @@ import Home from '@/components/Home'
 import Search from '@/components/Search'
 import InstructorLogin from '@/components/InstructorLogin'
 import InstructorSignUp from '@/components/InstructorSignUp'
-import InstructorPortal from '@/components/InstructorPortal'
 import InstAppCoverage from '@/components/InstAppCoverage'
 import InstructorVerfication from '@/components/InstructorVerificationForm'
-import InstructorCoverage from '@/components/InstructorCoverage'
+import InstructorProfile from '@/components/InstAppProfile'
 
 import SuperAdminLogin from '@/components/SuperAdmin/SuperAdminLogin'
 import HandleUserVerification from '@/components/SuperAdmin/HandleUserVerification'
 
 import Auth from '@/authorization'
 import SuperAdminAuth from '@/super-admin-authorization'
+import InstAppProfile from '@/components/LandingPage.vue';
 
 Vue.use(Router)
 
@@ -44,8 +44,8 @@ export default new Router({
     },
     {
       path: '/profile',
-      name: 'InstructorPortal',
-      component: InstructorPortal,
+      name: 'InstructorProfile',
+      component: InstructorProfile,
       beforeEnter: Auth
     },
     {
@@ -58,12 +58,6 @@ export default new Router({
       path: '/verification-form',
       name: 'InstructorVerification',
       component: InstructorVerfication,
-      beforeEnter: Auth
-    },
-    {
-      path: '/coverage',
-      name: 'InstructorConverage',
-      component: InstructorCoverage,
       beforeEnter: Auth
     },
     {

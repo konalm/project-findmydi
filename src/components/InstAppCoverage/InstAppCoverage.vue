@@ -1,29 +1,39 @@
 <template>
-<div class="coverage-page">
-  <inst-app-header />
-  <page-header :header="'Areas\'s you cover'" />
-  <inst-app-navbar />
+  <div class="coverage-page">
+    <inst-app-header />
+    <page-header :header="'Areas\'s you cover'" />
+    <inst-app-navbar />
 
-  <div class="coverage-container">
-    <!-- left side -->
-    <div class="coverage-container__left-side">
-      <div class="coverage-items-container">
-        <item 
-          v-for="coverage in coverages"
-          :key="coverage.id"
-          :coverage="coverage"
-        />
+    <div class="coverage-container">
+      <div class="coverage-container__left-side">
+        <div class="coverage-items-container">
+          <item v-for="coverage in coverages"
+            :key="coverage.id"
+            :coverage="coverage"
+            v-on:coverageModified="getCoverages()"
+          />
+        </div>
+
+        <div class="coverage-container__add-container">
+          <add-postcode v-on:newCoverageAdded="getCoverages()" 
+            v-on:insertPostcodeChanged="insertPostcodeChanged"
+            v-if="!insertingRegion"
+          />
+
+          <add-region v-on:newCoverageAdded="getCoverages()" 
+            v-on:insertRegionChanged="insertRegionChanged"
+            v-if="!insertingPostcode" 
+          />
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="coverage-container__right-side">
+        <main-map />
       </div>
     </div>
-
-    <div class="spacer"></div>
-
-    <!-- right side -->
-    <div class="coverage-container__right-side">
-      <main-map />
-    </div>
   </div>
-</div>
 </template>
 
 
@@ -35,8 +45,10 @@ import {httpAuth} from '@/http-requests'
 import InstAppHeader from '@/components/patterns/InstAppHeader'
 import PageHeader from '@/components/patterns/PageHeader.vue'
 import InstAppNavbar from '@/components/patterns/InstAppNavbar.vue'
-import Item from './children/CoverageItem.vue'
+import Item from './children/CoverageItem'
 import MainMap from './children/MainMap.vue'
+import AddPostcode from './children/AddPostcodeCoverage'
+import AddRegion from './children/AddRegionCoverage'
 
 
 @Component({
@@ -45,14 +57,19 @@ import MainMap from './children/MainMap.vue'
     PageHeader,
     InstAppNavbar,
     Item,
-    MainMap
+    MainMap,
+    AddPostcode,
+    AddRegion
   }
 })
 export default class InstAppCoverage extends Vue {
   coverages = []
+  insertingPostcode: boolean = false
+  insertingRegion: boolean = false
 
   beforeMount() {
     this.getCoverages()
+    document.body.className = 'grey-background'
   }
 
   /**
@@ -68,6 +85,19 @@ export default class InstAppCoverage extends Vue {
       })
   }
 
+  /** 
+   * 
+   */
+  insertPostcodeChanged(value) {
+    this.insertingPostcode = value
+  }
+
+  /** 
+   * 
+   */
+  insertRegionChanged(value) {
+    this.insertingRegion = value
+  }
 }
 </script>
 
@@ -76,13 +106,18 @@ export default class InstAppCoverage extends Vue {
 <style lang="scss" scoped>
   .coverage-container {
     display: flex;
-    // border: 1px solid red;
     justify-content: center;
     width: 1170px;
     margin: 0 auto;
 
     .spacer {
       width: 200px;
+    }
+
+    .coverage-container__add-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
     }
   }
 </style>

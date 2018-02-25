@@ -2,8 +2,6 @@
   <div>
     <user-header />
 
-    <div id="map-canvas"></div>
-
     <div class="container mt-5">
       <div class="search-page__main-container">
         <h1>Find My Driving Instructor</h1>
@@ -43,33 +41,6 @@
         v-if="searched && Object(instructorsFound).length === 0" 
       />
     </div>
-
-      
-    <label>Street
-      <input type="text" id="street" name="street" />
-    </label>
-
-    <label>Locality
-      <input type="text" id="locality" name="locality" />
-    </label>
-
-    <label>Region
-      <input type="text" id="region" name="region" />
-    </label>
-
-    <label>Country
-      <input type="text" id="country" name="country" />
-    </label>
-
-    <label>Latitude
-      <input type="text" id="latitude" name="latitude" />
-    </label>
-
-    <label>Longitude
-      <input type="text" id="longitude" name="longitude" />
-    </label>
-
-    <button v-on:click="changeLocation()">Change location</button>
   </div>
 </template>
 
@@ -102,11 +73,7 @@ export default class InstructorSearch extends Vue {
   beforeMount() {
     const latitude = 52.4892259301627;
     const longitude = -1.93615833563884;
-
-    // store.commit('setGoogleapisLocation', {long: longitude, lat: latitude})  
-    // location.init()
-
-    // location.init(latitude, longitude)
+    document.body.className = 'white-background' 
   }
 
   changeLocation() {
@@ -121,7 +88,6 @@ export default class InstructorSearch extends Vue {
     console.log(typeof(latitude))
 
     store.commit('setGoogleapisLocation', {long: longitude, lat: latitude})  
-    // location.init()
   }
 
   /**

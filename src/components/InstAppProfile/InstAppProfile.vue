@@ -6,17 +6,10 @@
   
   <div class="container mt-5 instructor-portal">
     <div class="instructor-portal__left-side">
-      <profile 
+      <profile-details
         :userProfile="user" 
         v-on:profileUpdated="getUser"
       />
-
-      <!-- <coverage
-        :coverage="coverage" 
-        v-on:coverageModified="getUser"  
-      /> -->
-
-      <!-- <stats /> -->
     </div>
 
     <div class="spacer"></div>
@@ -27,20 +20,20 @@
         v-on:newAvatarUploaded="getUser"
       />
 
-      <verification-request 
+      <!-- <verification-request 
         :verified="user.verified"
         :verifiedStatus="user.adi_licence_verification"
         :rejectReason="user.adi_licence_reject_reason"
         v-on:uploadAdiLicence="showUploadAdiLicence()"
-      />
+      /> -->
 
-      <VerificationRequirments
+      <!-- <VerificationRequirments
         :hourlyRate="user.hourly_rate"
         :coverages="coverage" 
         :avatar="user.avatar_url"
         :adiLicenceVerified="user.adi_licence_verification"
         v-if="!user.verified"
-      />
+      /> -->
     </div>
   </div>
 
@@ -63,8 +56,8 @@ import InstAppHeader from '@/components/patterns/InstAppHeader'
 import PageHeader from '@/components/patterns/PageHeader.vue'
 import InstAppNavbar from '@/components/patterns/InstAppNavbar.vue'
 import AdiLicenceUpload from './children/AdiLicenceUpload'
-import Profile from './children/Profile.vue'
-import Coverage from './children/coverage'
+import ProfileDetails from './children/ProfileDetails'
+// import Coverage from './children/coverage'
 import Stats from './children/Stats.vue'
 import VerificationRequirments from './children/VerificationRequirments.vue'
 
@@ -78,9 +71,9 @@ import location from '../../googleapis/location'
     InstAppHeader,
     PageHeader,
     InstAppNavbar,
-    Profile,
+    ProfileDetails,
     AdiLicenceUpload,
-    Coverage,
+    // Coverage,
     Stats,
     VerificationRequirments,
   }
@@ -121,6 +114,7 @@ export default class InstructorPortal extends Vue {
 
   beforeMount() {
     this.getUser()
+    document.body.className = 'grey-background'    
   }
 
 
@@ -128,6 +122,8 @@ export default class InstructorPortal extends Vue {
    * get instructor from the api
    */
   getUser() {
+    console.log('get user')
+
     httpAuth.get('instructor')
       .then(res => {
         this.user = res.data

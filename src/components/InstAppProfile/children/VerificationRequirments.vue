@@ -1,26 +1,26 @@
 <template>
-<div class="white-modal-box__container text-center">
-  <p>What we need before your future students can start finding you</p>
+  <div class="white-modal-box__container text-center">
+    <p>What we need before your future students can start finding you</p>
 
-  <ul class="instructor-requirement-list">
-    <li>Hourly Rate  <status-symbol :status="hasHourlyRate" /></li>
+    <ul class="instructor-requirement-list">
+      <li>Hourly Rate  <status-symbol :status="hasHourlyRate" /></li>
 
-    <li>Postcode (where you are based to give driving lessons)
-        <status-symbol :status="hasPostcode" />
-    </li>
+      <li>Postcode (where you are based to give driving lessons)
+          <status-symbol :status="hasPostcode" />
+      </li>
 
-    <li>Upload a profile picture <status-symbol :status="hasAvatar" /></li>
+      <li>Upload a profile picture <status-symbol :status="hasAvatar" /></li>
 
-    <li>Submit a photo of your adi licence for verification
-      <status-symbol 
-        :status="adiLicenceIsVerified" 
-        v-if="adiLicenceIsVerified !== 2" 
-      />
+      <li>Submit a photo of your adi licence for verification
+        <status-symbol 
+          :status="adiLicenceIsVerified" 
+          v-if="adiLicenceIsVerified !== 2" 
+        />
 
-      <i class="fa fa-ellipsis-h text-warning" v-if="adiLicenceIsVerified === 2"></i>
-    </li>
-  </ul>
-</div>
+        <i class="fa fa-ellipsis-h text-warning" v-if="adiLicenceIsVerified === 2"></i>
+      </li>
+    </ul>
+  </div>
 </template>
 
 

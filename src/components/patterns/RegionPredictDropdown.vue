@@ -1,5 +1,5 @@
 <template>
-  <div class="region-search-container dropdown">
+  <div class="region-search-container dropdown" v-bind:class="view">
     <input type="text"
       class="dropdown-toggle region-input"
       placeholder="Enter region"
@@ -41,6 +41,7 @@ export default class RegionPredictDropdown extends Vue {
   predictions = []
 
   @Prop() value: ''
+  @Prop() view: ''
 
   beforeMount() {
     this.region = this.value
@@ -80,6 +81,10 @@ export default class RegionPredictDropdown extends Vue {
 <style lang="scss" scoped>
   .region-search-container {
     margin-bottom: 15px;
+
+    &.update-region-coverage {
+      // margin-bottom: 0;
+    }
 
     input {
       width: 350px;

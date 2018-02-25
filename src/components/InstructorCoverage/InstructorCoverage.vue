@@ -66,7 +66,6 @@ export default class InstructorCoverage extends Vue {
   }
   
 
-
   /**
    * 
    */
@@ -86,6 +85,7 @@ export default class InstructorCoverage extends Vue {
         throw new Error(err)
       })
   }
+
 
   /** 
    * 

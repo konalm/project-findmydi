@@ -102,7 +102,7 @@
   button.close-button {
     background: #EF7676;
     border: none;
-    border-radius: 5px;
+    // border-radius: 5px;
     padding: 5px;
     font-size: 30px;
     line-height: 0;
@@ -112,14 +112,5 @@
     .material-icons {
       font-size: 30px;
     }
-  }
-
-  button.base-button {
-    margin: 0 auto;
-    width: 60%;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    font-size: 18px;
-    text-align: center;
   }
 }

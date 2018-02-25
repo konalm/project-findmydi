@@ -1,6 +1,6 @@
 .modal-box {
   background: white;
-  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .05);
+  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.08);
   
   .modal-box__header {
     background-color: $primary-color;
@@ -18,7 +18,17 @@
       margin: 0;
       padding: 0;
     }
+
+    .fa {
+      cursor: pointer;
+    }
   }
+
+  .close-button__container {
+    // padding: 10px 0 10px 10px;
+  }
+
+
 
   .modal-box__body {
     padding: 15px;
@@ -27,5 +37,11 @@
     margin-bottom: 20px;
     font-size: 17px;
     line-height: 30px;
+
+    .modal-box__button-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
   }
 }
