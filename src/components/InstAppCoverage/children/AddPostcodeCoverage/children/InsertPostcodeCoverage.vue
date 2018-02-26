@@ -84,11 +84,6 @@ export default class InsertPostcode extends Vue {
   editMode: boolean = true
 
 
-  mounted() {
-    location.init()
-  }
-
-
   /** 
    * send postcode and range to API to be saved
    */
@@ -115,13 +110,13 @@ export default class InsertPostcode extends Vue {
       .then(res => {
         this.toggleEditMode()
 
-        this.$store.commit(
-          'setGoogleapisLocation', 
-          {long: Number(res.data.long), lat: Number(res.data.lat)}
-        )
-
-        this.$store.commit('setGoogleapisRadius', Number(this.range))
-        location.init()
+        location.init([
+          {
+            longitude: Number(res.data.long), 
+            latitude: Number(res.data.lat),
+            range: this.range
+          }
+        ])
       })
       .catch(err => {
         this.addResponse.message = 'invalid postcode'

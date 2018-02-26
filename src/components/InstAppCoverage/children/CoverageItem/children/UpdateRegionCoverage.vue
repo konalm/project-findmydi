@@ -13,7 +13,7 @@
 
     <!-- buttons -->
     <div class="modal-box__button-container">    
-      <button class="base-button secondary" v-on:click="$emit('toggleEditMode')">
+      <button class="base-button secondary" v-on:click="updateMap()">
         See changed on map
       </button>
 
@@ -42,7 +42,6 @@ import {httpAuth} from '@/http-requests'
 import RegionDropdown from '@/components/patterns/RegionPredictDropdown.vue'
 import location from '../../../../../googleapis/location'
 
-
 let geometry = {lng: '', lat: ''}
 
 
@@ -61,17 +60,54 @@ export default class updateRegionCoverage extends Vue {
   beforeMount() {
     this.region = this.coverage.region 
     this.range = this.coverage.range
-
-    this.$store.commit(
-      'setGoogleapisLocation', 
-      {long: Number(this.coverage.longitude) , lat: Number(this.coverage.latitude)}
-    )
-
-    this.$store.commit('setGoogleapisRadius', Number(this.range))
+    geometry = {lng: this.coverage.longitude, lat: this.coverage.latitude}    
   }
 
   mounted() {
-    location.init()
+    location.init([
+      {
+        longitude: this.coverage.longitude, 
+        latitude: this.coverage.latitude,
+        range: this.coverage.range
+      }
+    ])
+  }
+
+  /**
+   * 
+   */
+  async updateMap() {
+    this.errorMessage = ''
+
+    if (this.region !== this.coverage.region) {
+      await this.updateRegion()
+    }
+
+    location.init([
+      {
+        longitude: geometry.lng, 
+        latitude: geometry.lat,
+        range: this.range
+      }
+    ])
+  }
+
+  /** 
+   * 
+   */
+  async updateRegion() {
+    await httpAuth.get(`googleapis-geocode/${this.region}`)
+      .then(res => {
+        geometry = {
+          lng: res.data.geometry.location.lng, 
+          lat: res.data.geometry.location.lat
+        }
+      })
+      .catch(err => {
+        if (err.response.status === 422) {
+          this.errorMessage =  err.response.data
+        }
+      })
   }
 
   /**
@@ -92,7 +128,7 @@ export default class updateRegionCoverage extends Vue {
         })
       })
       .then(res => {
-        this.$emit('coverageModified')
+        this.$emit('coverageUpdated')
       })
       .catch(err => {
         this.errorMessage = err.response.data 
@@ -134,9 +170,7 @@ export default class updateRegionCoverage extends Vue {
       padding-left: 20px;
 
       input {
-        // margin-bottom: 15px; 
         color: #918F8F;
-        
 
         &.range {
           width: 69px;

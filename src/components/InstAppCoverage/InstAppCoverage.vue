@@ -15,14 +15,14 @@
         </div>
 
         <div class="coverage-container__add-container">
-          <add-postcode v-on:newCoverageAdded="getCoverages()" 
+          <add-postcode v-if="!insertingRegion"
+            v-on:newCoverageAdded="getCoverages()" 
             v-on:insertPostcodeChanged="insertPostcodeChanged"
-            v-if="!insertingRegion"
           />
 
-          <add-region v-on:newCoverageAdded="getCoverages()" 
+          <add-region v-if="!insertingPostcode" 
+            v-on:newCoverageAdded="getCoverages()" 
             v-on:insertRegionChanged="insertRegionChanged"
-            v-if="!insertingPostcode" 
           />
         </div>
       </div>
@@ -30,7 +30,7 @@
       <div class="spacer"></div>
 
       <div class="coverage-container__right-side">
-        <main-map />
+        <main-map :coverages="coverages" />
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@ import AddRegion from './children/AddRegionCoverage'
   }
 })
 export default class InstAppCoverage extends Vue {
-  coverages = []
+  coverages = [{id: null, postcode: '', region: '', range: '', coverage_type: ''}]
   insertingPostcode: boolean = false
   insertingRegion: boolean = false
 
@@ -79,6 +79,12 @@ export default class InstAppCoverage extends Vue {
     httpAuth.get('instructor-coverages')
       .then(res => {
         this.coverages = res.data
+
+        console.log('ab')
+        console.log(this.coverages)
+
+        // this.coverages.$set(0, 'boo')
+        
       })
       .catch(err => {
         throw new Error(err)

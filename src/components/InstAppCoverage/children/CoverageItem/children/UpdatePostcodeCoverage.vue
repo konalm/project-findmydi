@@ -39,6 +39,9 @@ import {Prop, Watch} from 'vue-property-decorator'
 import {httpAuth} from '@/http-requests'
 import location from '../../../../../googleapis/location'
 
+let geometry = {lng: '', lat: ''}
+
+
 @Component({})
 export default class postcodeCoverage extends Vue {
   postcode: string = ''
@@ -51,17 +54,17 @@ export default class postcodeCoverage extends Vue {
   beforeMount() {
     this.postcode = this.coverage.postcode
     this.range = this.coverage.range
-
-    this.$store.commit(
-      'setGoogleapisLocation', 
-      {long: Number(this.coverage.longitude) , lat: Number(this.coverage.latitude)}
-    )
-
-    this.$store.commit('setGoogleapisRadius', Number(this.range))
+    geometry = {lng: this.coverage.longitude, lat: this.coverage.latitude}
   }
 
   mounted() {
-    location.init()
+    location.init([
+      {
+        longitude: this.coverage.longitude, 
+        latitude: this.coverage.latitude,
+        range: this.coverage.range
+      }
+    ])
   }
 
   /** 
@@ -80,7 +83,13 @@ export default class postcodeCoverage extends Vue {
       this.$store.commit('setGoogleapisRadius', this.range)
     }
 
-    location.init()
+    location.init([
+      {
+        longitude: geometry.lng, 
+        latitude: geometry.lat,
+        range: this.range
+      }
+    ])
   }
     
   /**
@@ -107,10 +116,7 @@ export default class postcodeCoverage extends Vue {
   async updatePostcode() {
     await httpAuth.get(`postcode-lnglat/${this.postcode}`)
       .then(res => {
-        this.$store.commit(
-          'setGoogleapisRadius', 
-          {long: res.data.long ,lat: res.data.lat }
-        )
+        geometry = {lng: res.data.long, lat: res.data.lat}
       })
       .catch(err => {
         if (err.response.status === 422) {

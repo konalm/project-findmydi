@@ -39,7 +39,6 @@
           <input type="number" class="range" v-model="range" /> Miles
         </div>
 
-
         <p class="api-response mt-3 text-danger" v-if="addCoverageResponse">
           {{ addCoverageResponse }}
         </p>
@@ -93,8 +92,13 @@ export default class AddRegion extends Vue {
   onRangeChanged(val: string, oldVal: string) {
     if (this.range <= 0) { return }
 
-    this.$store.commit('setGoogleapisRadius', Number(this.range))
-    location.init()
+    location.init([
+      {
+        longitude: Number(geometry.lng), 
+        latitude: Number(geometry.lat),
+        range: Number(this.range)
+      }
+    ])
   }
 
   /** 
@@ -118,13 +122,14 @@ export default class AddRegion extends Vue {
           this.editRegion = false 
           this.editRange = true
           geometry = res.data.geometry.location
-          
-          this.$store.commit(
-            'setGoogleapisLocation', 
-            {long: geometry.lng, lat: geometry.lat} 
-          )
 
-          location.init()
+          location.init([
+            {
+              longitude: Number(geometry.lng), 
+              latitude: Number(geometry.lat),
+              range: 0
+            }
+          ])
       })
       .catch(err => {
         this.addRegionResponse = err.response.data

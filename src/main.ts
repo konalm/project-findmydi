@@ -17,7 +17,7 @@ var load = function (done) {
 
 load( function () {
     console.log('location init')
-    location.init();
+    // location.init([])
 });
 
 
