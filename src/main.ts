@@ -11,12 +11,10 @@ import location from './googleapis/location'
 var gapiurl = '//maps.googleapis.com/maps/api/js?callback=__googleMapsApiOnLoadCallback';
 
 var load = function (done) {
-    console.log('load')
     jsonp(gapiurl, '__googleMapsApiOnLoadCallback', done);
 };
 
 load( function () {
-    console.log('location init')
     // location.init([])
 });
 

@@ -47,8 +47,6 @@ export default class UploadAdiLicense extends Vue {
    * 
    */
   updatePhoto(targetFiles) {
-    console.log('update photo')
-    
     this.pic = targetFiles[0]
     this.$emit('updatePhoto', targetFiles[0])
   }

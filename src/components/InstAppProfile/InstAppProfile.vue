@@ -122,8 +122,6 @@ export default class InstructorPortal extends Vue {
    * get instructor from the api
    */
   getUser() {
-    console.log('get user')
-
     httpAuth.get('instructor')
       .then(res => {
         this.user = res.data

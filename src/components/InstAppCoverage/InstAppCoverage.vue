@@ -78,13 +78,7 @@ export default class InstAppCoverage extends Vue {
   getCoverages() {
     httpAuth.get('instructor-coverages')
       .then(res => {
-        this.coverages = res.data
-
-        console.log('ab')
-        console.log(this.coverages)
-
-        // this.coverages.$set(0, 'boo')
-        
+        this.coverages = res.data        
       })
       .catch(err => {
         throw new Error(err)

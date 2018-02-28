@@ -67,6 +67,10 @@ export default class InstructorLogin extends Vue {
   password: string = ''
   errorMessage: string = ''
   userType: number = 1
+
+  beforeMount() {
+    document.body.className = 'white-background'
+  }
   
   /**
    * submit email and password to api for credential check
@@ -83,7 +87,7 @@ export default class InstructorLogin extends Vue {
       localStorage.setItem('token', res.data.access_token)
       updateHttpHeader()
 
-      router.push({name: 'InstructorPortal'})
+      router.push({name: 'InstructorProfile'})
     })
     .catch((err) => {
       this.errorMessage = err.response.data

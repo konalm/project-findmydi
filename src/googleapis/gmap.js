@@ -1,6 +1,6 @@
 import store from '../store'
 
-export default function(coverages, callback) {
+export default function(coverages) {
   var geocoder = new google.maps.Geocoder();
   var map = new google.maps.Map(document.getElementById('map-canvas'), {zoom: 10});
   map.setCenter(new google.maps.LatLng(coverages[0].latitude, coverages[0].longitude));

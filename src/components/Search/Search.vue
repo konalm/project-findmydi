@@ -13,8 +13,7 @@
 
   <!-- Search Results -->
   <div class="search-results-container container">
-    <instructor-result 
-      v-for="instructor in searchResults"
+    <instructor-result v-for="instructor in searchResults"
       :key="instructor.id"
       :instructor="instructor"
     />
@@ -95,7 +94,6 @@ export default class InstructorSearchResponse extends Vue {
         this.loading = false
       })
       .catch(err => { 
-        console.log(err.response.status);
         if (err.response.status === 422) {
           this.invalidPostcode = true
           this.loading = false

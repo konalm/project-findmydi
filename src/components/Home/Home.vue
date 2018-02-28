@@ -71,23 +71,7 @@ export default class InstructorSearch extends Vue {
   x: boolean = false
 
   beforeMount() {
-    const latitude = 52.4892259301627;
-    const longitude = -1.93615833563884;
     document.body.className = 'white-background' 
-  }
-
-  changeLocation() {
-    console.log('change location');
-
-    const latitude = this.x === true ? 52.4892259301627 : 0
-    const longitude = this.x === true ? -1.93615833563884 : 0
-    this.x = !this.x
-
-    console.log(latitude)
-    console.log(longitude)
-    console.log(typeof(latitude))
-
-    store.commit('setGoogleapisLocation', {long: longitude, lat: latitude})  
   }
 
   /**

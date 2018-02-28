@@ -5,8 +5,6 @@
     </div>
 
     <div class="modal-box__body">
-      <!-- {{ coverages }} -->
-
       <div id="map-canvas"></div>
     </div>
   </div>
@@ -22,26 +20,15 @@ import {Prop, Watch} from 'vue-property-decorator'
 
 @Component({})
 export default class CoverageMap extends Vue {
-  @Prop() coverages = []
+  @Prop() coverages: [Object]
 
   @Watch('coverages')
   onCoveragesChanged(val, oldVal: string) {
-    console.log('coverages changed !!')
-    console.log(val)
     this.coverages = val
 
     if (this.coverages) {
       location.init(this.coverages)
     }
-  }
-
-  beforeMount() {
-    console.log('MM coverages -->')
-    console.log(this.coverages)
-  }
-
-  mounted() {
-    // location.init(this.coverages)
   }
 }
 </script>

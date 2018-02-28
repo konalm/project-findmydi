@@ -54,10 +54,6 @@ export default class VerificationRequirments extends Vue {
   }
 
   get adiLicenceIsVerified() {
-    console.log(this.adiLicenceVerified);
-    console.log(typeof(this.adiLicenceVerified));
-    console.log(parseInt(this.adiLicenceVerified));
-
     if (parseInt(this.adiLicenceVerified) === 2) {
       return 2
     }

@@ -79,10 +79,6 @@ export default class postcodeCoverage extends Vue {
       await this.updatePostcode()
     }
 
-    if (this.range !== this.coverage.range) {
-      this.$store.commit('setGoogleapisRadius', this.range)
-    }
-
     location.init([
       {
         longitude: geometry.lng, 
