@@ -42,6 +42,11 @@ li.special {
   padding: 7px 10px 7px 10px;
 }
 
+span.faint-text {
+  font-size: 12px; 
+  opacity: 47%;
+}
+
 
 @import './buttons.scss';
 @import './form.scss';

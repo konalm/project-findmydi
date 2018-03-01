@@ -11,7 +11,13 @@
         </div>
 
         <div class="modal-box__body">
-          <slot name="introStep"></slot>
+          <div class="content">
+            <slot name="introStep"></slot>
+          </div> 
+
+          <div class="modal-box__proceed-button-container">
+            <slot name="proceedButton"></slot>
+          </div>
         </div>
       </div>
     </div>
@@ -51,9 +57,27 @@ export default class IntroLayout extends Vue {
     width: 574px;
     height: 423px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
 
     .modal-box__body {
       padding-right: 30px;
+      display: flex;
+      flex-direction: column;
+      flex-direction: flex-end;
+      flex-grow: 1;
+      margin-bottom: 0;
+
+      div:first-child {
+        flex-grow: 1;
+        flex: 1;
+      }
+
+      .modal-box__proceed-button-container {
+        text-align: right;
+        padding-bottom: 10px;
+      }
     }
   }
 </style>
