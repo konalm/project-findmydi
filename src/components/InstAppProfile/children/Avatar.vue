@@ -33,7 +33,6 @@
             v-if="uploadAvatar"
           >
             <p v-if="!user.avatar_url">Upload a Profile Picture</p>
-    
             <p v-if="user.avatar_url">Upload a New Profile Picture</p>
           </label> 
 

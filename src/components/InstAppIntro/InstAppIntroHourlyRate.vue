@@ -1,9 +1,9 @@
 <template>
-  <layout>
+  <layout :infoBox="true" :previousView="'/intro'">
     <span slot="stepHeader">Hourly Rate</span>
 
     <span slot="introStep" v-if="allowedAccess"> 
-      <p> How much money do you want to charge per hour ? </p>
+      <p>How much money do you want to charge per hour ?</p>
 
       <p> £
         <input type="number" class="form-group hourly-rate" placeholder="Hourly rate" 
@@ -16,7 +16,7 @@
           <span class="faint-text"> E.g. First three lessons only £10.00</span>
         </p>
 
-        <button class="base-button small" v-if="!addOffer" 
+        <button class="base-button small secondary" v-if="!addOffer" 
           v-on:click="toggleAddOffer()"
         > 
           <i class="fa fa-plus"></i> Sure 
@@ -24,20 +24,27 @@
 
         <textarea v-model="offer" v-if="addOffer"></textarea>
 
-        <button class="base-button small blue" v-on:click="toggleAddOffer()" 
+        <button class="base-button small cancel" v-on:click="toggleAddOffer()" 
           v-if="addOffer"
         >
-          Cancel
+          <i class="fa fa-times"></i> Cancel
         </button>
       </div>
 
-      <div class="error-container text-danger">
-        <p v-if="errorMessage"> {{ errorMessage }} </p>
+      <div class="error-container text-danger" v-if="errorMessage">
+        <p> {{ errorMessage }} </p>
       </div>
     </span>
 
     <button slot="proceedButton" class="base-button padded-button"
-      v-on:click="proceed()">Proceed</button>
+      v-on:click="proceed()"
+    >
+      Proceed
+    </button>
+
+    <p slot="infoText"> 
+      Hourly rate can easily be updated again in the future.
+    </p>
   </layout>
 </template>
 
@@ -49,6 +56,7 @@ import Component from 'vue-class-component'
 import Layout from './Layout'
 import {httpAuth} from '@/http-requests'
 import router from '@/router'
+
 
 @Component({
   components: {
@@ -71,8 +79,6 @@ export default class InstAppIntro extends Vue {
    */
   toggleAddOffer() {
     this.addOffer = !this.addOffer
-
-    if (!this.addOffer) { this.offer = '' }
   }
 
   /** 
@@ -91,8 +97,9 @@ export default class InstAppIntro extends Vue {
     router.push('/intro/coverage')
   }
 
+
   /** 
-   * 
+   * update hourly rate http request
    */
   async updateHourlyRate() {
     const formData = {hourlyRate: this.hourlyRate}
@@ -108,6 +115,8 @@ export default class InstAppIntro extends Vue {
    * validate hourly rate 
    */
   validation() {
+    this.errorMessage = ''
+
     if (!this.hourlyRate) {
       return this.errorMessage = 'Hourly rate is required'
     }
@@ -118,24 +127,31 @@ export default class InstAppIntro extends Vue {
   }
 
   /** 
-   * get instructor induction info 
+   * get instructor induction info
    */
-  getInductionInfo() {
-    httpAuth.get('instructor-induction-info')
-      .then(res => {
-        if (!res.data.intro_read) {
-          router.push('/intro');
-          return 
-        }
+  async getInductionInfo() {
+    try {
+      var response = await httpAuth.get('instructor-induction-info')
+    } catch (err) {
+      throw Error(err.response.data)
+    }
 
-        this.allowedAccess = true
-      })
-      .catch(err => {
-        throw new Error(err)
-      })
+    /* redirect to previous step if not complete */ 
+    if (!response.data.intro_read) {
+      return router.push('/intro');
+    }
+
+    this.allowedAccess = true
+    this.offer = response.data.offer ? response.data.offer : this.offer
+
+    this.hourlyRate = response.data.hourly_rate ? 
+      response.data.hourly_rate : this.hourlyRate
+
+    this.$store.commit('setInductionInfo', response.data)
   }
 }
 </script>
+
 
 
 <style lang="scss" scoped>
@@ -149,6 +165,8 @@ input.hourly-rate {
 
 .offer-container {
   margin-top: 15px;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .error-container {
@@ -157,6 +175,7 @@ input.hourly-rate {
 
 textarea {
   width: 100%;
-  height: 70px;
+  height: 60px;
+  resize: none;
 }
 </style>

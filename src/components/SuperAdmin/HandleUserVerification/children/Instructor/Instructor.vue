@@ -146,6 +146,4 @@ export default class InstructorInReview extends Vue {
       margin-right: 20px;
     }
   }
-
-
 </style>

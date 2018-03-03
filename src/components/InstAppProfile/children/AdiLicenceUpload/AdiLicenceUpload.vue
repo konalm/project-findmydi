@@ -24,13 +24,11 @@
             Select ADI licence photo 
           </label>
 
-          <input id="adiLicenceUpload"
-            type="file"
-            name="adi-licence-input"
-            @change="adiLicenceSelected($event.target.files)"
+          <input id="adiLicenceUpload" type="file" name="adi-licence-input"
             class="adi-licence-upload"
             size="60"
             accept="/images/*"
+            @change="adiLicenceSelected($event.target.files)"
           />
         </div>
 

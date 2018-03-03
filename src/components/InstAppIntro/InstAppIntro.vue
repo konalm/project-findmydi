@@ -37,6 +37,10 @@ import {httpAuth} from '@/http-requests'
   }
 })
 export default class InstAppIntro extends Vue {
+  mounted() {
+    this.getInductionInfo()
+  }
+
   /** 
    * set intro read to yes in model  
    * redirect to intro hourly rate
@@ -53,6 +57,18 @@ export default class InstAppIntro extends Vue {
       })
   }
 
+    /** 
+   * get instructor induction info
+   */
+  async getInductionInfo() {
+    try {
+      var response = await httpAuth.get('instructor-induction-info')
+    } catch (err) {
+      throw Error(err.response.data)
+    }
+
+    this.$store.commit('setInductionInfo', response.data)
+  }
 }
 </script>
 

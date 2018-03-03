@@ -3,18 +3,78 @@
    <i class="fas fa-money-bill-alt"></i>
    
     <ul class="instapp__navbar">
-      <router-link v-for="navItem in navItems"
-        :key="navItem.id"
-        tag="li" 
-        active-class="active" 
-        class="instapp__navbar__item" 
-        v-bind:to="navItem.link" 
-        exact
+      <!-- Introduction -->
+      <li class="instapp__navbar__item" 
+        v-bind:class="{'active' : linkIsActive('')}" 
+        v-on:click="goToLink('/intro', true)"
       >
-        <i v-bind:class="navItem.faIcon"></i>
+       <i class="fa fa-home"></i>
         <div class="spacer"></div>
-        <p class="item-title"> {{ navItem.item }} </p>
-      </router-link>
+        <p class="item-title">  Introduction </p>
+
+        <i class="fa fa-check" aria-hidden="true" v-if="introRead"></i>        
+      </li>
+
+
+      <!-- Hourly Rate -->
+      <li class="instapp__navbar__item" 
+        v-bind:class="{'active' : linkIsActive('/hourly-rate'), 'disabled': !introRead}" 
+        v-on:click="goToLink('/intro/hourly-rate', introRead)"
+      >
+       <i class="fa fa-money"></i>
+        <div class="spacer"></div>
+        <p class="item-title"> Hourly Rate </p>
+
+        <i class="fa fa-check" aria-hidden="true" v-if="hourlyRateComplete"></i>        
+      </li>
+
+
+      <!-- Coverage -->
+      <li class="instapp__navbar__item" 
+        v-bind:class="{
+          'active' : linkIsActive('/coverage'), 
+          'disabled': !hourlyRateComplete
+        }" 
+        v-on:click="goToLink('/intro/coverage', hourlyRateComplete)"
+      >
+       <i class="fa fa-map-marker"></i>
+        <div class="spacer"></div>
+        <p class="item-title"> Coverage </p>
+
+        <i class="fa fa-check" aria-hidden="true" v-if="coverageComplete"></i>        
+      </li>
+
+
+      <!-- Profile Pic -->
+      <li class="instapp__navbar__item" 
+        v-bind:class="{
+          'active' : linkIsActive('/profile-picture'), 
+          'disabled': !coverageComplete
+        }" 
+        v-on:click="goToLink('/intro/profile-picture', coverageComplete)"
+      >
+       <i class="fa fa-user"></i>
+        <div class="spacer"></div>
+        <p class="item-title"> Profile Picture </p>
+
+        <i class="fa fa-check" aria-hidden="true" v-if="profilePicComplete"></i>        
+      </li>
+
+
+      <!-- Adi Licence -->
+      <li class="instapp__navbar__item" 
+        v-bind:class="{
+          'active' : linkIsActive('/adi-licence'), 
+          'disabled': !profilePicComplete
+        }" 
+        v-on:click="goToLink('/intro/adi-licence', profilePicComplete)"
+      >
+       <i class="fa fa-id-card"></i>
+        <div class="spacer"></div>
+        <p class="item-title"> ADI Licence </p>
+
+        <i class="fa fa-check" aria-hidden="true" v-if="adiLicenceComplete"></i>        
+      </li>
     </ul>
   </div>
 </template>
@@ -24,38 +84,58 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import {Prop} from 'vue-property-decorator'
+import {Prop, Watch} from 'vue-property-decorator'
+import router from '@/router'
 
 
 @Component({})
 export default class Navbar extends Vue {
-  navItems = [
-    {
-      item: 'INTRODUCTION',
-      faIcon: 'fa fa-home',
-      link: '/intro'
-    },
-    {
-      item: 'HOURLY RATE',
-      faIcon: 'fa fa-money',
-      link: '/intro/hourly-rate'
-    },
-     {
-      item: 'COVERAGE',
-      faIcon: 'fa fa-map-marker',
-      link: '/intro/coverage'
-    },
-    {
-      item: 'PROFILE PICTURE',
-      faIcon: 'fa fa-user',
-      link: '/intro/profile-picture'
-    },
-     {
-      item: 'ADI LICENCE',
-      faIcon: 'fa fa-id-card',
-      link: '/intro/adi-licence'
-    }
-  ]
+  get inductionInfo() {
+    return this.$store.getters.inductionInfo
+  }
+
+  get introRead() {
+    return this.inductionInfo.intro_read ? true : false
+  }
+
+  get hourlyRateComplete() {
+    return this.inductionInfo.hourly_rate ? true : false
+  }
+
+  get hourlyRateLink() {
+    return !this.introRead ? '/intro/hourly-rate' : '#'
+  }
+
+  get coverageComplete() {
+    if (this.inductionInfo.coverages[0] === undefined) { return }
+
+    const coverages = JSON.parse(this.inductionInfo.coverages)
+    return coverages[0] !== null ? true : false
+  }
+
+  get profilePicComplete() {
+    return this.inductionInfo.avatar_url ? true : false
+  }
+
+  get adiLicenceComplete() {
+    return this.inductionInfo.adi_licence_verification ? true : false
+  }
+
+  /** 
+   * 
+   */
+  goToLink(link, requirement) {
+    if (!requirement) { return }
+
+    router.push(link)
+  }
+
+  /** 
+   *
+   */ 
+  linkIsActive(link) {
+    return `#/intro${link}` === window.location.hash
+  }
 }
 </script>
 
@@ -67,7 +147,7 @@ export default class Navbar extends Vue {
   ul.instapp__navbar {
     display: flex;
     margin: 0 auto;
-  margin-bottom: 40px;
+    margin-bottom: 55px;
     justify-content: center;
 
     li.instapp__navbar__item {
@@ -83,10 +163,15 @@ export default class Navbar extends Vue {
       justify-content: center;
       cursor: pointer;
       box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .03);
+      opacity: 0.5;
+      position: relative;
+
+      &.disabled {
+        cursor: not-allowed;
+      }
 
       &.active {
-        border: 1px solid $primary-color;
-        background: #F2F2F2;
+        opacity: 1;
       }
       
       .spacer {
@@ -96,6 +181,13 @@ export default class Navbar extends Vue {
       .fa {
         font-size: 22px;
         color: $primary-color;
+      }
+
+      .fa-check {
+        position: absolute;
+        bottom: -40%;
+        left: 50%;
+        transform: translateX(-50%);
       }
 
       p, .fa {

@@ -49,6 +49,7 @@ export default new Router({
       name: 'InstructorSignUp',
       component: InstructorSignUp
     },
+    /* Induction */ 
     {
       path: '/intro',
       name: 'InstructorIntro',
