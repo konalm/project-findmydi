@@ -33,6 +33,21 @@
         font-size: 22px;
       }
     }
+
+    .header__settings {
+      margin-right: 60px;
+
+      ul {
+        li {
+          cursor: pointer;
+          padding: 7px 0 7px 10px;
+        }
+      }
+
+      .fa {
+        cursor: pointer;
+      }
+    }
   }
 
   .container {

@@ -6,6 +6,13 @@
   
   <div class="container mt-5 instructor-portal">
     <div class="instructor-portal__left-side">
+      <adi-licence-review 
+        v-if="parseInt(user.adi_licence_verification) !== 1"
+        :status="user.adi_licence_verification" 
+        :rejectReason="user.adi_licence_reject_reason"
+        v-on:uploadAdiLicence="showUploadAdiLicence()"
+      />
+
       <profile-details
         :userProfile="user" 
         v-on:profileUpdated="getUser"
@@ -19,21 +26,6 @@
         :user="user" 
         v-on:newAvatarUploaded="getUser"
       />
-
-      <!-- <verification-request 
-        :verified="user.verified"
-        :verifiedStatus="user.adi_licence_verification"
-        :rejectReason="user.adi_licence_reject_reason"
-        v-on:uploadAdiLicence="showUploadAdiLicence()"
-      /> -->
-
-      <!-- <VerificationRequirments
-        :hourlyRate="user.hourly_rate"
-        :coverages="coverage" 
-        :avatar="user.avatar_url"
-        :adiLicenceVerified="user.adi_licence_verification"
-        v-if="!user.verified"
-      /> -->
     </div>
   </div>
 
@@ -57,9 +49,9 @@ import PageHeader from '@/components/patterns/PageHeader.vue'
 import InstAppNavbar from '@/components/patterns/InstAppNavbar.vue'
 import AdiLicenceUpload from './children/AdiLicenceUpload'
 import ProfileDetails from './children/ProfileDetails'
-// import Coverage from './children/coverage'
-import Stats from './children/Stats.vue'
-import VerificationRequirments from './children/VerificationRequirments.vue'
+import AdiLicenceReview from './children/AdiLicenceReview.vue'
+// import Stats from './children/Stats.vue'
+// import VerificationRequirments from './children/VerificationRequirments.vue'
 
 import location from '../../googleapis/location'
 
@@ -73,9 +65,7 @@ import location from '../../googleapis/location'
     InstAppNavbar,
     ProfileDetails,
     AdiLicenceUpload,
-    // Coverage,
-    Stats,
-    VerificationRequirments,
+    AdiLicenceReview
   }
 })
 export default class InstructorPortal extends Vue {

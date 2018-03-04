@@ -1,8 +1,6 @@
 <template>
   <div class="region-search-container dropdown" v-bind:class="view">
-    <input type="text"
-      class="dropdown-toggle region-input"
-      placeholder="Enter region"
+    <input type="text" class="dropdown-toggle region-input" placeholder="Enter region"
       v-model="region"
       id="regionSearch"
       data-toggle="dropdown"
@@ -12,8 +10,7 @@
       aria-labelledby="regionSearch" 
       v-if="predictions && predictions.length > 0"
     >
-      <li 
-        v-for="prediction in predictions" 
+      <li v-for="prediction in predictions" 
         v-on:click="selectRegion(prediction.description)"
         :key="prediction.description"
       >

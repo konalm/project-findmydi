@@ -1,8 +1,6 @@
 <template>
   <div>
-    <logged-out-header
-      :loggedIn="false" 
-    />
+    <logged-out-header :loggedIn="false" />
 
     <h1 class="text-center"> Sign Up </h1>
 
@@ -42,7 +40,7 @@
 
         <!-- confirm pasword -->
         <div class="form-row">
-            <input type="text" class="form-control" placeholder="Confirm Password" 
+            <input type="password" class="form-control" placeholder="Confirm Password" 
               v-model="confirmPassword"
             >
         </div>

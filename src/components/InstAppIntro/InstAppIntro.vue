@@ -69,9 +69,6 @@ export default class InstAppIntro extends Vue {
       throw Error(err.response.data)
     }
 
-    console.log('get info -->')
-    console.log(response.data)
-
     this.$store.commit('setInductionInfo', response.data)
   }
 }
