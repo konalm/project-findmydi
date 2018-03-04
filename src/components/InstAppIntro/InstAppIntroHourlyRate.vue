@@ -102,7 +102,7 @@ export default class InstAppIntro extends Vue {
    * update hourly rate http request
    */
   async updateHourlyRate() {
-    const formData = {hourlyRate: this.hourlyRate}
+    const formData = {hourlyRate: this.hourlyRate, offer: this.offer}
 
     try {
       var response = await httpAuth.put('instructor-hourly-rate', formData)
@@ -143,6 +143,8 @@ export default class InstAppIntro extends Vue {
 
     this.allowedAccess = true
     this.offer = response.data.offer ? response.data.offer : this.offer
+
+    if (this.offer) { this.addOffer = true }
 
     this.hourlyRate = response.data.hourly_rate ? 
       response.data.hourly_rate : this.hourlyRate

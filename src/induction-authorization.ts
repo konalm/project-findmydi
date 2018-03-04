@@ -4,13 +4,13 @@ import store from '@/store'
 
 /**  
  * Check user has authorized token 
- * Redirect user to Introduction if the are not inducted
+ * Redirect user to Main App if they have already been inducted
  */
-const authCheck = (to, from, next) => {
+const inductionAuthCheck = (to, from, next) => {
   httpAuth.get('instructor')
     .then((res) => { 
-      if (!res.data.inducted) {
-        router.push('/intro')
+      if (res.data.inducted) {
+        router.push('/profile')
       }
 
       store.commit('setUser', res.data)
@@ -22,4 +22,4 @@ const authCheck = (to, from, next) => {
 }
 
 
-export default authCheck;
+export default inductionAuthCheck;

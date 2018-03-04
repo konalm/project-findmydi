@@ -118,6 +118,8 @@ export default class InstAppCoverage extends Vue {
       return router.push('/intro/hourly-rate')
     }
 
+    console.log(response)
+
     this.handleExistingCoverage(response)
     this.allowedAccess = true 
     this.$store.commit('setInductionInfo', response.data)    
@@ -130,8 +132,12 @@ export default class InstAppCoverage extends Vue {
   handleExistingCoverage(response) {
     const coverages = JSON.parse(response.data.coverages)
 
+    console.log('coverages --->')
+    console.log(coverages)
+
     if (coverages[0] === null) { return }
 
+    console.log('EXISTING COVERAGE')
     this.existingCoverage = true
     existingCoverage = coverages[0]
     this.postcode = existingCoverage.postcode 
@@ -167,9 +173,14 @@ export default class InstAppCoverage extends Vue {
    * redirect to next step (profile pic)
    */
   async proceed() {
+    console.log('proceed !!')
+
     if (this.validation()) { return }
 
+    console.log('passed validation')
+
     if (!this.existingCoverage) {
+      console.log('create coverage')
       try {
         await this.createCoverage()
       } catch (err) {
@@ -180,6 +191,7 @@ export default class InstAppCoverage extends Vue {
     }
     
     try {
+      console.log('update coverage')
       await this.updateCoverage()
     } catch (err) {
       return this.errorMessage = err.message

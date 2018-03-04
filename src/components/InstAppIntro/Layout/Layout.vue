@@ -123,8 +123,12 @@ export default class IntroLayout extends Vue {
   .info-box {
     width: 170px;
     position: absolute;
-    top: 43%;
-    right: 16%;
+    top: 320px;
+    right: 10%;
+
+    @media screen and (max-width: 1200px) {
+      right: 20px;
+    }
 
     .info-box__header {
       color: $primary-color;

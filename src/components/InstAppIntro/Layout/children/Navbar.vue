@@ -84,6 +84,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import _ from 'lodash'
 import {Prop, Watch} from 'vue-property-decorator'
 import router from '@/router'
 
@@ -107,9 +108,10 @@ export default class Navbar extends Vue {
   }
 
   get coverageComplete() {
-    if (this.inductionInfo.coverages[0] === undefined) { return }
+    if (_.isEmpty(this.inductionInfo.coverages)) { return }
 
     const coverages = JSON.parse(this.inductionInfo.coverages)
+  
     return coverages[0] !== null ? true : false
   }
 

@@ -10,80 +10,56 @@
       <form v-on:submit.prevent="submitSignUp()" v-if="!registered">
         <!-- name -->
         <div class="form-row split form-group">
-          <input 
-            type="text" 
-            class="form-control"
-            placeholder="First Name"
+          <input type="text" class="form-control" placeholder="First Name"
             v-model="firstName"
           >
 
-          <input 
-            type="text" 
-            class="form-control"
-            placeholder="Surname"
+          <input type="text"  class="form-control" placeholder="Surname"
             v-model="surname"
           >
         </div>
 
         <!-- email -->
         <div class="form-row">
-            <input 
-              type="email" 
-              class="form-control"
-              placeholder="Email Address"
-              v-model="email"
-            >
+          <input type="email" class="form-control" placeholder="Email Address"
+            v-model="email"
+          >
         </div>
 
         <!-- adi license number -->
         <div class="form-row">
-          <input 
-            type="number" 
-            class="form-control" 
-            placeholder="ADI License Number" 
+          <input  type="number"  class="form-control" placeholder="ADI License Number" 
             v-model="adi"
           >
         </div>
 
         <!-- password -->
         <div class="form-row">
-          <input 
-            type="password"
-            class="form-control"
-            placeholder="Password"
+          <input type="password" class="form-control" placeholder="Password"
             v-model="password"
           >
         </div>
 
         <!-- confirm pasword -->
         <div class="form-row">
-            <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Confirm Password" 
+            <input type="text" class="form-control" placeholder="Confirm Password" 
               v-model="confirmPassword"
             >
         </div>
 
         <div class="form-row">
           <label class="form-check-label">
-            <input 
-              type="radio" 
-              class="form-check-input" 
-              value="female"
+            <input type="radio" class="form-check-input" value="female"
               v-model="gender"
             >
             Female
           </label>
 
             <label class="form-check-label male">
-            <input 
-              type="radio" 
-              class="form-check-input" 
-              value="male" checked
-              v-model="gender"
-            >
-            Male
+              <input type="radio" class="form-check-input" value="male" checked
+                v-model="gender"
+              >
+              Male
           </label>
         </div>
 

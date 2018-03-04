@@ -21,6 +21,7 @@ import SuperAdminLogin from '@/components/SuperAdmin/SuperAdminLogin'
 import HandleUserVerification from '@/components/SuperAdmin/HandleUserVerification'
 
 import Auth from '@/authorization'
+import InductionAuth from '@/induction-authorization'
 import SuperAdminAuth from '@/super-admin-authorization'
 
 
@@ -54,32 +55,33 @@ export default new Router({
       path: '/intro',
       name: 'InstructorIntro',
       component: InstructorIntro,
-      beforeEnter: Auth
+      beforeEnter: InductionAuth
     },
     {
       path: '/intro/hourly-rate',
       name: 'InstructorIntroHourlyRate',
       component: InstructorIntroHourlyRate,
-      beforeEnter: Auth
+      beforeEnter: InductionAuth
     },
     {
       path: '/intro/coverage',
       name: 'InstructorIntroCoverage',
       component: InstructorIntroCoverage,
-      beforeEnter: Auth 
+      beforeEnter: InductionAuth 
     },
     {
       path: '/intro/profile-picture',
       name: 'InstructorIntroProfilePic',
       component: InstructorIntroProfilePic,
-      beforeEnter: Auth
+      beforeEnter: InductionAuth
     },
     {
       path: '/intro/adi-licence',
       name: 'InstructorIntroAdiLicence',
       component: InstructorIntroAdiLicence,
-      beforeEnter: Auth
+      beforeEnter: InductionAuth
     },
+    /* App */ 
     {
       path: '/profile',
       name: 'InstructorProfile',

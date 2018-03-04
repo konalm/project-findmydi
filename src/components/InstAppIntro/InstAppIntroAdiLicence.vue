@@ -4,7 +4,7 @@
 
     <span slot="introStep" v-if="!adiLicenceStatus"> 
       <div class="adi-licence-no">
-        <p> ADI Licence NO {{ adiLicenceStatus }}
+        <p> ADI Licence NO
           <input type="string" class="form-group adi-licence" 
             placeholder="ADI Licence NO"
             v-model="adiLicenceNo"
@@ -138,6 +138,14 @@ export default class InstAppCoverage extends Vue {
       var response = await httpAuth.get('instructor-induction-info')
     } catch (err) {
       throw Error(err.response.data)
+    }
+
+    if (!response.data.avatar_url) { 
+      return router.push('/intro/profile-picture')
+    }
+
+    if (response.data.inducted) {
+      router.push('/profile')
     }
 
     this.adiLicenceNo = response.data.adi_licence_no

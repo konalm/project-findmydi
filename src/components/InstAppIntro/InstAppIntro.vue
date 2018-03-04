@@ -24,12 +24,14 @@
 </template>
 
 
+
 <script lang='ts'>
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import Layout from './Layout'
 import router from '@/router'
 import {httpAuth} from '@/http-requests'
+
 
 @Component({
   components: {
@@ -57,7 +59,7 @@ export default class InstAppIntro extends Vue {
       })
   }
 
-    /** 
+  /** 
    * get instructor induction info
    */
   async getInductionInfo() {
@@ -66,6 +68,9 @@ export default class InstAppIntro extends Vue {
     } catch (err) {
       throw Error(err.response.data)
     }
+
+    console.log('get info -->')
+    console.log(response.data)
 
     this.$store.commit('setInductionInfo', response.data)
   }
