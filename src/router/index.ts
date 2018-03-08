@@ -10,12 +10,14 @@ import InstructorSignUp from '@/components/InstructorSignUp'
 import InstAppCoverage from '@/components/InstAppCoverage'
 import InstructorVerfication from '@/components/InstructorVerificationForm'
 import InstructorProfile from '@/components/InstAppProfile'
+import InstructorReviews from '@/components/InstructorApp/Reviews'
 
 import InstructorIntro from '@/components/InstAppIntro'
 import InstructorIntroHourlyRate from '@/components/InstAppIntro/InstAppIntroHourlyRate.vue'
 import InstructorIntroCoverage from '@/components/InstAppIntro/InstAppCoverage.vue'
 import InstructorIntroProfilePic from '@/components/InstAppIntro/InstAppIntroProfilePic.vue'
 import InstructorIntroAdiLicence from '@/components/InstAppIntro/InstAppIntroAdiLicence.vue'
+
 
 import SuperAdminLogin from '@/components/SuperAdmin/SuperAdminLogin'
 import HandleUserVerification from '@/components/SuperAdmin/HandleUserVerification'
@@ -92,6 +94,12 @@ export default new Router({
       path: '/areas-you-cover',
       name: 'InstAppCoverage',
       component: InstAppCoverage,
+      beforeEnter: Auth
+    },
+    {
+      path: '/reviews',
+      name: 'InstructorReviews',
+      component: InstructorReviews,
       beforeEnter: Auth
     },
     {

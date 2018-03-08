@@ -35,6 +35,11 @@ export default class InstAppNavbar extends Vue {
       item: 'AREA\'S YOU COVER',
       faIcon: 'fa fa-map-marker',
       link: '/areas-you-cover'
+    },
+    {
+      item: 'REVIEWS',
+      faIcon: 'fa fa-star',
+      link: '/reviews'
     }
   ]
 }
