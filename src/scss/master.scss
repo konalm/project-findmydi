@@ -56,6 +56,9 @@ span.faint-text {
   height: 100%;
 }
 
+span.underline {
+  text-decoration: underline;
+}
 
 @import './buttons.scss';
 @import './form.scss';
