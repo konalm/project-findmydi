@@ -1,17 +1,40 @@
 <template>
 <div class="write-review-page">
   <user-header />
-  <page-header v-if="validReviewToken && !reviewSubmitted"
-    :header="`Driving instructor review for ${reviewInvite.instructor_name}`" 
+  <page-header v-if="!reviewSubmitted"
+    :header="`Write a review`" 
     :textCenter="true" 
   />
 
-  <div class="container mt-5" v-if="validReviewToken">
+  <div class="container mt-5">
     <div class="modal-box" v-if="!reviewSubmitted">
       <div class="modal-box__body">
-        <p> Tell us about your experience</p> 
+        <div class="form-group">
+          <p>Name</p>
+          <input type="text" v-model="name" placeholder="Enter name" />
+        </div>
 
-        <textarea placeholder="your experience" v-model="message"></textarea>
+        <div class="form-group">
+          <p>Email address</p>
+          <input type="text" v-model="email" placeholder="Enter email" />
+        </div>
+
+        <div class="form-group">
+          <p>Postcode</p> 
+          <input type="text" v-model="postcode" placeholder="Enter postcode" />
+        </div> 
+
+        <div class="form-group">
+          <p>Instructor name</p>
+          <input type="text" v-model="instructorsName" 
+            placeholder="Enter Instructor's name" 
+          />
+        </div>
+          
+        <div class="form-group your-experience">
+          <p> Tell us about your experience</p> 
+          <textarea placeholder="your experience" v-model="message"></textarea>
+        </div>
 
         <div class="rating-container">
           <p> Rate your experience out of <span class="underline">10</span></p>
@@ -65,27 +88,30 @@ import router from '@/router'
   }
 })
 export default class WriteReview extends Vue {
+  name: string = ''
+  email: string = ''
+  postcode: string = ''
+  instructorsName: string = ''
   message: string = ''
   rating: number = 7.5
-  inviteToken: string = ''
-  validReviewToken: boolean = false
-  reviewInvite = {instructor_name: '', name: '', email: ''}
   errorMessage = ''
   reviewSubmitted: boolean = false
 
-
   beforeMount() {
     document.body.className = 'grey-background'
-    this.inviteToken = this.$route.params.inviteToken
-    this.getReviewInvite()
   }
 
   /** 
    * send review to API to be saved
    */
   submitReview() {
-    http.post('reviews', {
-      token: this.inviteToken,
+    if (this.validation()) { return }
+
+    http.post('review-requests', {
+      name: this.name,
+      email: this.email,
+      postcode: this.postcode,
+      instructorName: this.instructorsName,
       reviewMessage: this.message,
       rating: this.rating
     })
@@ -97,28 +123,29 @@ export default class WriteReview extends Vue {
       })
   }
 
-  /** 
-   * get review invite data from token
-   */
-  getReviewInvite() {
-    http.get(`review-by-token/${this.inviteToken}`)
-      .then(res => {
-        if (!res.data) { return router.push('/') }
-
-        this.validReviewToken = true
-        this.reviewInvite = res.data
-      })
-      .catch(err => {
-        router.push('/')
-      })
-  }
 
   /** 
    * validation 
    */
   validation() {
+    if (!this.name) {
+      return this.errorMessage = 'name is required'
+    }
+
+    if (!this.email) {
+      return this.errorMessage = 'email is required'
+    }
+
+    if (!this.postcode) {
+      return this.errorMessage = 'postcode is required'
+    }
+
+    if (!this.instructorsName) {
+      return this.errorMessage = 'instructor\'s name is required'
+    }
+
     if (!this.message) {
-      return this.errorMessage = 'please tell us about your experience'
+      return this.errorMessage  = 'please tell is about your experience'
     }
 
     if (!this.rating) {
@@ -132,4 +159,33 @@ export default class WriteReview extends Vue {
 
 <style lang='scss' scoped>
 @import "../../scss/review-form.scss";
+
+.modal-box {
+  .modal-box__body {
+    .form-group {
+      padding-left: 80px;
+      padding-right: 80px;
+      text-align: left;
+
+      p {
+        text-align: left;
+      }
+
+
+      &.your-experience {
+        margin-top: 30px;
+      }
+
+      input { 
+        width: 100%;
+        height: 36px;
+        font-size: 14px;
+      }
+
+      textarea {
+        width: 100%;
+      }
+    }
+  }
+}
 </style>

@@ -1,0 +1,73 @@
+@import "./variables.scss";
+
+.modal-box {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 18px;
+
+  .modal-box__body {
+    padding-left: 20px;
+    padding-right: 20px;
+
+    textarea {
+      width: 80%;
+      height: 140px;
+      resize: none;
+    }
+
+    .rating-container {
+      margin-top: 20px;
+      margin-bottom: 40px;
+
+    
+      .slider-container {
+        display: flex;
+        align-items: center;
+
+          input.slider {
+            -webkit-appearance: none;
+            padding-left: 0;
+            margin-left: 20px;
+            margin-right: 20px;
+            height: 2px;
+            background: rgb(191,191,191);
+          }
+
+          .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: $primary-color;
+            cursor: pointer;
+          }
+
+          .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: $primary-color;
+            cursor: pointer;
+          }
+      }
+
+      .rating-text-container {
+        border: 1px solid #BFBFBF;
+        margin: 0 auto;
+        margin-top: 25px;
+        display: flex;
+        width: 50px;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+
+
+        p.rating {
+          font-size: 30px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+

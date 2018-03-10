@@ -5,6 +5,7 @@ import LandingPage from '@/components/LandingPage.vue'
 import Home from '@/components/Home'
 import Search from '@/components/Search'
 import WriteReview from '@/components/WriteReview'
+import WriteReviewRequest from '@/components/WriteReviewRequest'
 
 import InstructorLogin from '@/components/InstructorLogin'
 import InstructorSignUp from '@/components/InstructorSignUp'
@@ -57,6 +58,11 @@ export default new Router({
       path: '/write-review/:inviteToken',
       name: 'WriteReview',
       component: WriteReview
+    },
+    {
+      path: '/write-review',
+      name: 'WriteReviewRequest',
+      component: WriteReviewRequest
     },
     /* Induction */ 
     {

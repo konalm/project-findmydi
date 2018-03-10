@@ -1,8 +1,9 @@
 <template>
 <div class="container">
-  <p class="page-header"> {{ header}} </p>
+  <p class="page-header" v-bind:class="{'text-center': textCenter}"> 
+    {{ header}} 
+  </p>
 </div>
-
 </template>
 
 <script lang="ts">
@@ -13,6 +14,7 @@ import {Prop} from 'vue-property-decorator'
 @Component({})
 export default class PageHeader extends Vue {
   @Prop() header: ''
+  @Prop() textCenter: false
 }
 </script>
 
