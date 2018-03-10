@@ -21,6 +21,7 @@
       <review-request-item v-for="reviewRequest in reviewRequests" 
         :key="reviewRequest.item" 
         :review-request="reviewRequest"
+        v-on:reviewInvitesModified="getReviewRequests()"
       />
     </div>
   </div>
@@ -93,6 +94,7 @@ export default class Reviews extends Vue {
   }
 }
 </script>
+
 
 
 <style lang="scss" scoped>

@@ -60,7 +60,6 @@ export default class ReviewInvite extends Vue {
       email: this.email 
     })
       .then(res => {
-        console.log('invite sent')
         this.name = ''
         this.email = ''
         this.toggleInvite()
