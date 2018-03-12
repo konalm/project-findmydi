@@ -20,7 +20,6 @@ import InstructorIntroCoverage from '@/components/InstAppIntro/InstAppCoverage.v
 import InstructorIntroProfilePic from '@/components/InstAppIntro/InstAppIntroProfilePic.vue'
 import InstructorIntroAdiLicence from '@/components/InstAppIntro/InstAppIntroAdiLicence.vue'
 
-
 import SuperAdminLogin from '@/components/SuperAdmin/SuperAdminLogin'
 import HandleUserVerification from '@/components/SuperAdmin/HandleUserVerification'
 
@@ -37,7 +36,6 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home,
-      beforeEnter: Auth
     },
     {
       path: '/search/:postcode',

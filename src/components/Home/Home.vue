@@ -72,6 +72,7 @@ export default class InstructorSearch extends Vue {
 
   beforeMount() {
     document.body.className = 'white-background' 
+    console.log('HOME')
   }
 
   /**

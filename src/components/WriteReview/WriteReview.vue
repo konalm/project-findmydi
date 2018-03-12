@@ -1,12 +1,12 @@
 <template>
 <div class="write-review-page">
   <user-header />
-  <page-header v-if="validReviewToken && !reviewSubmitted"
+  <page-header v-if="validReviewToken && !reviewSubmitted && !forbidden"
     :header="`Driving instructor review for ${reviewInvite.instructor_name}`" 
     :textCenter="true" 
   />
 
-  <div class="container mt-5" v-if="validReviewToken">
+  <div class="container mt-5" v-if="validReviewToken && !forbidden">
     <div class="modal-box" v-if="!reviewSubmitted">
       <div class="modal-box__body">
         <p> Tell us about your experience</p> 
@@ -42,6 +42,8 @@
 
     <review-submitted-message v-if="reviewSubmitted" />
   </div>
+
+  <forbidden-message v-if="forbidden" />
 </div>
 </template>
 
@@ -53,6 +55,7 @@ import Component from 'vue-class-component'
 import UserHeader from '@/components/patterns/user-header'
 import PageHeader from '@/components/patterns/PageHeader.vue'
 import ReviewSubmittedMessage from '@/components/patterns/ReviewSubmitted.vue'
+import ForbiddenMessage from './children/ForbiddenMessage.vue'
 import {http} from '@/http-requests'
 import router from '@/router'
 
@@ -61,7 +64,8 @@ import router from '@/router'
   components: {
     UserHeader,
     PageHeader,
-    ReviewSubmittedMessage
+    ReviewSubmittedMessage,
+    ForbiddenMessage
   }
 })
 export default class WriteReview extends Vue {
@@ -72,6 +76,7 @@ export default class WriteReview extends Vue {
   reviewInvite = {instructor_name: '', name: '', email: ''}
   errorMessage = ''
   reviewSubmitted: boolean = false
+  forbidden: boolean = false
 
 
   beforeMount() {
@@ -105,11 +110,19 @@ export default class WriteReview extends Vue {
       .then(res => {
         if (!res.data) { return router.push('/') }
 
+
+
         this.validReviewToken = true
-        this.reviewInvite = res.data
+        this.reviewInvite = res.data.data
       })
       .catch(err => {
-        router.push('/')
+        if (err.response.status === 404) {
+          return router.push('/')
+        }
+
+        if (err.response.status === 403) {
+          return this.forbidden = true
+        }
       })
   }
 

@@ -17,7 +17,9 @@
     <input type="text" placeholder="name" v-model="name" />
     <input type="text" placeholder="email" v-model="email" />
 
-    <p class="text-danger error-message" v-if="errorMessage"> {{ errorMessage }} </p>
+    <p class="text-danger error-message" v-if="errorMessage"> 
+      {{ errorMessage }} 
+    </p>
 
     <button class="base-button padded-button" v-on:click="sendInvite()">
       Send Email
@@ -74,6 +76,8 @@ export default class ReviewInvite extends Vue {
    * 
    */
   validation() {
+    this.errorMessage = ''
+
     if (!this.name) {
       return this.errorMessage = 'Name is required'
     }

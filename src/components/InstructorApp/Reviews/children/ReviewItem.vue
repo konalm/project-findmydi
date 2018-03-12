@@ -1,7 +1,10 @@
 <template>
   <div class="modal-box">
     <div class="modal-box__header">
-      <p>{{ review.reviewer_name }}</p>
+      <p>{{ review.reviewer_name }} 
+        <span class="subtext">{{review.reviewer_email }}</span>
+      </p>
+
       <p class="review-date">{{ reviewDate }}</p>
     </div> 
 
@@ -67,6 +70,11 @@ export default class ReviewItem extends Vue {
   .modal-box__header {
     display: flex;
     justify-content: space-between;
+
+    span.subtext {
+      font-size: 14px;
+      font-weight: 100;
+    }
 
     .review-date {
       font-size: 16px;
