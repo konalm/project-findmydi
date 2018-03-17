@@ -46,6 +46,7 @@ const mutations = {
   setInductionInfo: (state, payload) => { state.inductionInfo = payload }
 }
 
+
 export default new Vuex.Store({
   state,
   getters,

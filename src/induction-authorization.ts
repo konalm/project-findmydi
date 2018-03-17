@@ -17,7 +17,7 @@ const inductionAuthCheck = (to, from, next) => {
       next() 
     })
     .catch((err) => { 
-      router.push({name: 'InstructorLogin'}) 
+      router.push({name: 'Login'}) 
     })
 }
 

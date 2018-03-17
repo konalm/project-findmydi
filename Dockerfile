@@ -14,7 +14,7 @@ RUN npm install
 
 
 # Tell Docker about the port that we will run on 
-EXPOSE 8080
+EXPOSE 4000
 
 
 # Set the command to run the node server.
