@@ -1,8 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <logged-out-header
-      :loggedIn="false" 
-    />
+    <logged-out-header :loggedIn="false" />
 
     <div class="login-page">
       <div class="login-container">
@@ -48,7 +46,6 @@ import {http} from '@/http-requests'
 import {httpAuth, updateHttpHeader} from '@/http-requests'
 
 import router from '@/router'
-
 import LoggedOutHeader from '@/components/patterns/logged-out-header'
 
 
