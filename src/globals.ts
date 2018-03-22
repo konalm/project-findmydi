@@ -6,7 +6,7 @@ switch (window.location.hostname) {
     apiUrl = 'http://localhost:8181/';
     break;
   case 'staging.app.findmydi.com':
-    apiUrl = 'http://staging.api.findmydi.com';
+    apiUrl = 'http://staging.api.findmydi.com/';
     break;
 }
 
