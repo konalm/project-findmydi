@@ -69,6 +69,7 @@ export default class Login extends Vue {
    * if successfully store access token recieved in Cookie and Store
    */
   submitLogin() {
+    console.log('submit login');
     if (!this.validation()) { return }
 
     http.post('login', {
