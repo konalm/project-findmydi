@@ -8,7 +8,7 @@ import store from './store'
 import jsonp from './googleapis/jsonp'
 import location from './googleapis/location'
 
-var gapiurl = '//maps.googleapis.com/maps/api/js?callback=__googleMapsApiOnLoadCallback';
+var gapiurl = '//maps.googleapis.com/maps/api/js?callback=__googleMapsApiOnLoadCallback&key=AIzaSyCd5WYdM03hqbS74XrUXtYooNrKmUPW5w4';
 
 var load = function (done) {
     jsonp(gapiurl, '__googleMapsApiOnLoadCallback', done);
