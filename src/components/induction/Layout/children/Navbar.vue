@@ -104,7 +104,7 @@ export default class Navbar extends Vue {
   }
 
   get hourlyRateLink() {
-    return !this.introRead ? '/intro/hourly-rate' : '#'
+    return !this.introRead ? '/induction/hourly-rate' : '#'
   }
 
   get coverageComplete() {
@@ -136,7 +136,7 @@ export default class Navbar extends Vue {
    *
    */ 
   linkIsActive(link) {
-    return `#/intro${link}` === window.location.hash
+    return `#/induction${link}` === window.location.hash
   }
 }
 </script>
