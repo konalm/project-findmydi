@@ -33,7 +33,7 @@
         <i class="fa fa-info-circle"></i>
       </div> 
 
-      <div class="info-box__body">
+      <div class="info-box__body"> 
         <slot name="infoText"></slot>
       </div>
     </div>
