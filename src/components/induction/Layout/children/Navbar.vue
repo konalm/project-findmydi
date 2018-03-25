@@ -136,7 +136,7 @@ export default class Navbar extends Vue {
    *
    */ 
   linkIsActive(link) {
-    return `#/intro${link}` === window.location.hash
+    return `#/induction${link}` === window.location.hash
   }
 }
 </script>

@@ -208,6 +208,11 @@ export default class InductionAdiLicence extends Vue {
   .pic-container {
     width: 348px;
     height: 180px;
+
+    .adi-img-preview {
+      height: 150px;
+      width: auto;
+    }
   }
 
   .api-response-container {
