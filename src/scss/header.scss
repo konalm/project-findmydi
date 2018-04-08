@@ -21,6 +21,12 @@
         padding-right: 50px;
       }
 
+      @media screen and (max-width: 650px) {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+
       h3.logo {
         font-size: 20px;
         color: $primary-color;
@@ -36,6 +42,10 @@
 
     .header__settings {
       margin-right: 60px;
+
+      @media screen and (max-width: 650px) {
+        margin-right: 20px;
+      }
 
       ul {
         li {
@@ -70,6 +80,15 @@
       margin-right: 35px;
       list-style: none;
       font-size: 16px;
+    }
+  }
+
+  .header__logo {
+    width: 180px;
+    height: auto;
+
+    @media screen and (max-width: 650px) {
+      width: 140px;
     }
   }
 }

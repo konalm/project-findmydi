@@ -85,14 +85,26 @@ export default class ReviewRequestItem extends Vue {
 
 <style lang="scss" scoped>
 .modal-box {
+  @media screen and (max-width: 750px) {
+    margin-bottom: 20px;
+  }
+
   .modal-box__body {
     text-align: center;
     padding-right: 30px;
     padding-top: 15px;
 
+    @media screen and (max-width: 650px) {
+      margin-bottom: 5px;
+    }
+
     p {
       margin: 0;
       line-height: 33px;
+
+      @media screen and (max-width: 650px) {
+        line-height: 22px;
+      }
     }
 
     .modal-box__button-container {

@@ -38,6 +38,24 @@ export default class CoverageMap extends Vue {
   .modal-box.map {
     width: 425px;
 
+    @media screen and (max-width: 900px) {
+      border: 1px solid green;
+      width: 350px;
+    }
+
+    @media screen and (max-width: 800px) {
+      width: 250px;
+    }
+
+    @media screen and (max-width: 650px) {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    @media screen and (max-width: 550px) {
+      width: 90%;
+    }
+
     .modal-box__body {
       margin: 0;
       padding: 30px 0 30px 0;
@@ -48,5 +66,20 @@ export default class CoverageMap extends Vue {
     width: 326px;
     height: 326px;
     margin: 0 auto; 
+
+    @media screen and (max-width: 900px) {
+      width: 300px;
+      height: 300px;
+    }
+
+    @media screen and (max-width: 800px) {
+      width: 200px;
+      height: 200px;
+    }
+
+    @media screen and (max-width: 650px) {
+      width: 250px;
+      height: 250px;
+    }
   }
 </style>

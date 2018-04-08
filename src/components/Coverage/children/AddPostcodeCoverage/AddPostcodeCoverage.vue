@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div class="add-coverage-box-container" 
+    v-bind:class="{'insert-mode' : insertPostcode}"
+  >
     <div class="add-coverage-box" v-on:click="toggleInsert()" 
       v-if="!insertPostcode"
     >
@@ -21,6 +23,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import InsertPostcode from './children/InsertPostcodeCoverage.vue'
+
 
 @Component({
   components: {

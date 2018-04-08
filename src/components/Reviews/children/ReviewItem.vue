@@ -2,6 +2,7 @@
   <div class="modal-box">
     <div class="modal-box__header">
       <p>{{ review.reviewer_name }} 
+        <br />
         <span class="subtext">{{review.reviewer_email }}</span>
       </p>
 
@@ -74,17 +75,30 @@ export default class ReviewItem extends Vue {
     span.subtext {
       font-size: 14px;
       font-weight: 100;
+
+      @media screen and (max-width: 650px) {
+        font-size: 11px 
+      }
     }
 
     .review-date {
       font-size: 16px;
       font-weight: 100;
+
+      @media screen and (max-width: 650px) {
+        font-size: 11px 
+      }
     }
   }
 
   .modal-box__body {
     font-size: 16px;
 
+    @media screen and (max-width: 650px) {
+      font-size: 12px;
+      line-height: 20px;
+    }
+    
     .ratings-container {
       margin-top: 25px;
       display: flex;
@@ -95,6 +109,10 @@ export default class ReviewItem extends Vue {
         font-size: 30px;
         color: $primary-color;
         margin: 0;
+
+        @media screen and (max-width: 650px) {
+          font-size: 20px;
+        }
       }
     }
   }

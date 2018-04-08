@@ -1,6 +1,8 @@
 <template>
-  <div class="logged-out-header">
-    <div class="container">
+  <div class="header inst-app">
+    <div class="header__inner">
+      <img src="../../../assets/findmydi-dark.png" class="header__logo">
+
       <ul class="logged-out-header__nav">
         <li>Login</li>
         <li>Sign Up</li>

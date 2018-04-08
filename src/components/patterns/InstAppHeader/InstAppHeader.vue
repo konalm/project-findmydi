@@ -1,8 +1,7 @@
 <template>
 <div class="header inst-app">
   <div class="header__inner">
-    
-    <h3 class="logo">FIND MY DI</h3>
+    <img src="../../../assets/findmydi-dark.png" class="header__logo">
 
     <div class="header__settings dropdown">
       <i class="fa fa-cog dropdown-toggle" data-toggle="dropdown" id="settings"></i>

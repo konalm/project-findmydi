@@ -1,35 +1,35 @@
 <template>
-  <div class="modal-box">
-    <div class="modal-box__header">
-      {{ coverage.coverage_type }}
+<div class="modal-box">
+  <div class="modal-box__header">
+    {{ coverage.coverage_type }}
 
-      <div class="modal-box__header__icon-container">
-        <i class="fa fa-edit" v-on:click="toggleUpdate()"></i>
+    <div class="modal-box__header__icon-container">
+      <i class="fa fa-edit" v-on:click="toggleUpdate()"></i>
 
-        <div class="spacer"></div>
+      <div class="spacer"></div>
 
-        <i class="fa fa-close" v-on:click="destroy()"></i>
-      </div>
+      <i class="fa fa-close" v-on:click="destroy()"></i>
     </div>
-
-    <div class="modal-box__body" v-if="!update">
-      <p v-if="coverage.coverage_type === 'postcode'"> {{ coverage.postcode }} </p> 
-      <p v-if="coverage.coverage_type === 'region'"> {{ coverage.region }} </p>
-      <p>Range: {{ coverage.range }} Miles</p>
-    </div>
-
-    <update-postcode 
-      v-if="update && coverage.coverage_type === 'postcode'" 
-      :coverage="coverage" 
-      v-on:coverageUpdated="coverageUpdated()"
-    />
-
-    <update-region
-      v-if="update && coverage.coverage_type === 'region'"
-      :coverage="coverage"
-      v-on:coverageUpdated="coverageUpdated()"
-    />
   </div>
+
+  <div class="modal-box__body" v-if="!update">
+    <p v-if="coverage.coverage_type === 'postcode'"> {{ coverage.postcode }} </p> 
+    <p v-if="coverage.coverage_type === 'region'"> {{ coverage.region }} </p>
+    <p>Range: {{ coverage.range }} Miles</p>
+  </div>
+
+  <update-postcode 
+    v-if="update && coverage.coverage_type === 'postcode'" 
+    :coverage="coverage" 
+    v-on:coverageUpdated="coverageUpdated()"
+  />
+
+  <update-region
+    v-if="update && coverage.coverage_type === 'region'"
+    :coverage="coverage"
+    v-on:coverageUpdated="coverageUpdated()"
+  />
+</div>
 </template>
 
 
@@ -92,6 +92,19 @@ export default class CoverageItem extends Vue {
   .modal-box {
     width: 376px;
     margin-bottom: 50px;
+
+    @media screen and (max-width: 700px) {
+      width: 300px;
+    }
+
+    @media screen and (max-width: 650px) {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    @media screen and (max-width: 550px) {
+      width: 90%;
+    }
   
     .modal-box__header {
       .modal-box__header__icon-container {
@@ -107,11 +120,25 @@ export default class CoverageItem extends Vue {
       text-align: center;
       padding-left: 0;
       padding-right: 0;
+
+      @media screen and (max-width: 650px) {
+        line-height: 10px;
+
+        button {
+          line-height: 20px;
+        }
+      }
       
       p {
         font-size: 20px;
         color: #6F6F6F;
         line-height: 50px;
+
+        @media screen and (max-width: 650px) {
+          font-size: 16px;
+          line-height: 35px;
+          margin: 0;
+        }
       }
     }
   }

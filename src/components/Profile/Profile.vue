@@ -50,9 +50,6 @@ import InstAppNavbar from '@/components/patterns/InstAppNavbar.vue'
 import AdiLicenceUpload from './children/AdiLicenceUpload'
 import ProfileDetails from './children/ProfileDetails'
 import AdiLicenceReview from './children/AdiLicenceReview.vue'
-// import Stats from './children/Stats.vue'
-// import VerificationRequirments from './children/VerificationRequirments.vue'
-
 import location from '../../googleapis/location'
 
 

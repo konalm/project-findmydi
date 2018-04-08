@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <div class="add-coverage-box" v-on:click="toggleInsert()" v-if="!insertRegion">
-      <i class="fa fa-plus"></i> 
-      <div class="spacer"></div> 
-      Region
-    </div>
-
-    <insert-region v-if="insertRegion"
-      v-on:toggleInsert="toggleInsert()"
-      v-on:newCoverageAdded="newCoverageAdded()"
-    />
+<div class="add-coverage-box-container"
+  v-bind:class="{'insert-mode' : insertRegion}"
+>
+  <div class="add-coverage-box" v-on:click="toggleInsert()" v-if="!insertRegion">
+    <i class="fa fa-plus"></i> 
+    <div class="spacer"></div> 
+    Region
   </div>
+
+  <insert-region v-if="insertRegion"
+    v-on:toggleInsert="toggleInsert()"
+    v-on:newCoverageAdded="newCoverageAdded()"
+  />
+</div>
 </template>
 
 

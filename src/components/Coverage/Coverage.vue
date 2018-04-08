@@ -68,8 +68,8 @@ export default class Coverage extends Vue {
   insertingRegion: boolean = false
 
   beforeMount() {
-    this.getCoverages()
     document.body.className = 'grey-background'
+    this.getCoverages()
   }
 
   /**
@@ -107,8 +107,14 @@ export default class Coverage extends Vue {
   .coverage-container {
     display: flex;
     justify-content: center;
-    width: 1170px;
+    max-width: 1170px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin: 0 auto;
+
+    @media screen and (max-width: 650px) {
+      flex-direction: column;
+    }
 
     .spacer {
       width: 200px;
@@ -118,6 +124,17 @@ export default class Coverage extends Vue {
       display: flex;
       justify-content: space-between;
       margin-bottom: 30px;
+
+      @media screen and (max-width: 650px) {
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      @media screen and (max-width: 550px) {
+        width: 90%;
+      }
     }
   }
 </style>
