@@ -21,13 +21,25 @@
         </div>
       </div>
 
-      <div class="intro__back-button-container" v-if="previousView"> 
+      <div class="intro__back-button-container mobile" v-if="previousView"> 
         <router-link :to="previousView">
           <i class="fa fa-arrow-left"></i>
         </router-link>
+
+         <!-- info box - mobile -->
+         <div class="info-box mobile" v-if="infoBox">
+          <div class="info-box__header">
+            <i class="fa fa-info-circle"></i>
+          </div> 
+
+          <div class="info-box__body"> 
+            <slot name="infoText"></slot>
+          </div>
+        </div>        
       </div>
     </div>
 
+    <!-- info box -->
     <div class="info-box" v-if="infoBox">
       <div class="info-box__header">
         <i class="fa fa-info-circle"></i>
@@ -50,13 +62,15 @@ import {Prop} from 'vue-property-decorator'
 import InstAppHeader from '@/components/patterns/InstAppHeader'
 import PageHeader from '@/components/patterns/PageHeader.vue'
 import Navbar from './children/Navbar.vue'
+import InfoBox from './children/InfoBox.vue'
 
 
 @Component({
   components: {
     InstAppHeader,
     PageHeader,
-    Navbar
+    Navbar,
+    InfoBox
   }
 })
 export default class IntroLayout extends Vue {
@@ -68,7 +82,6 @@ export default class IntroLayout extends Vue {
   beforeMount() {
     document.body.className = 'grey-background'
   }
-
 }
 </script>
 
@@ -78,12 +91,16 @@ export default class IntroLayout extends Vue {
   @import '../../../scss/variables.scss';
 
   .modal-box {
-    width: 574px;
+    max-width: 574px;
     height: 423px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     padding-bottom: 0;
+
+    @media screen and (max-width: 650px) {
+      height: auto;
+    }
 
     .modal-box__body {
       padding-right: 30px;
@@ -94,6 +111,10 @@ export default class IntroLayout extends Vue {
       flex-grow: 1;
       margin-bottom: 0;
       position: relative;
+
+      @media screen and (max-width: 650px) {
+        padding: 10px;
+      }
 
       .content {
         flex-grow: 1;
@@ -108,11 +129,13 @@ export default class IntroLayout extends Vue {
   }
 
   .intro__back-button-container {
-    width: 574px;
+    max-width: 574px;
     margin: 0 auto;
     margin-top: 10px;
     font-size: 30px;
     padding-left: 15px;
+    display: flex;
+    justify-content: space-between;
 
     .fa {
       cursor: pointer;
@@ -120,6 +143,10 @@ export default class IntroLayout extends Vue {
     }
   }
 
+
+  /** 
+   * info box 
+   */ 
   .info-box {
     width: 170px;
     position: absolute;
@@ -128,6 +155,10 @@ export default class IntroLayout extends Vue {
 
     @media screen and (max-width: 1200px) {
       right: 20px;
+    }
+
+    @media screen and (max-width: 960px) {
+      display: none;
     }
 
     .info-box__header {
@@ -146,6 +177,15 @@ export default class IntroLayout extends Vue {
       p {
         margin: 0;
       }
+    }
+  }
+
+  .info-box.mobile {
+    position: static;
+    display: none;
+
+    @media screen and (max-width: 960px) {
+      display: block;
     }
   }
 </style>

@@ -1,12 +1,10 @@
 <template>
  <div class="container">
-   <i class="fas fa-money-bill-alt"></i>
-   
     <ul class="instapp__navbar">
       <!-- Introduction -->
       <li class="instapp__navbar__item" 
         v-bind:class="{'active' : linkIsActive('')}" 
-        v-on:click="goToLink('/intro', true)"
+        v-on:click="goToLink('/induction', true)"
       >
        <i class="fa fa-home"></i>
         <div class="spacer"></div>
@@ -19,7 +17,7 @@
       <!-- Hourly Rate -->
       <li class="instapp__navbar__item" 
         v-bind:class="{'active' : linkIsActive('/hourly-rate'), 'disabled': !introRead}" 
-        v-on:click="goToLink('/intro/hourly-rate', introRead)"
+        v-on:click="goToLink('/induction/hourly-rate', introRead)"
       >
        <i class="fa fa-money"></i>
         <div class="spacer"></div>
@@ -35,7 +33,7 @@
           'active' : linkIsActive('/coverage'), 
           'disabled': !hourlyRateComplete
         }" 
-        v-on:click="goToLink('/intro/coverage', hourlyRateComplete)"
+        v-on:click="goToLink('/induction/coverage', hourlyRateComplete)"
       >
        <i class="fa fa-map-marker"></i>
         <div class="spacer"></div>
@@ -51,7 +49,7 @@
           'active' : linkIsActive('/profile-picture'), 
           'disabled': !coverageComplete
         }" 
-        v-on:click="goToLink('/intro/profile-picture', coverageComplete)"
+        v-on:click="goToLink('/induction/profile-picture', coverageComplete)"
       >
        <i class="fa fa-user"></i>
         <div class="spacer"></div>
@@ -67,7 +65,7 @@
           'active' : linkIsActive('/adi-licence'), 
           'disabled': !profilePicComplete
         }" 
-        v-on:click="goToLink('/intro/adi-licence', profilePicComplete)"
+        v-on:click="goToLink('/induction/adi-licence', profilePicComplete)"
       >
        <i class="fa fa-id-card"></i>
         <div class="spacer"></div>
@@ -152,6 +150,10 @@ export default class Navbar extends Vue {
     margin-bottom: 55px;
     justify-content: center;
 
+    @media screen and (max-width: 650px) {
+      padding: 0;
+    }
+
     li.instapp__navbar__item {
       margin-right: 30px;
       padding: 0;
@@ -167,6 +169,13 @@ export default class Navbar extends Vue {
       box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .03);
       opacity: 0.5;
       position: relative;
+
+      @media screen and (max-width: 650px) {
+        flex-grow: 1;
+        margin-right: 15px;
+        font-size: 10px;
+        height: 65px;
+      }
 
       &.disabled {
         cursor: not-allowed;

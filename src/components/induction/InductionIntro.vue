@@ -83,12 +83,22 @@ export default class InductionIntro extends Vue {
     line-height: 35px;
     color: #5D5D5D;
     margin-top: 30px;
+
+    @media screen and (max-width: 650px) {
+      margin-top: 15px;
+      font-size: 14px;
+      line-height: 27px;
+    }
   }
 
   p.sub-text {
     font-size: 14px;
     margin-top: 20px;
     opacity: 71%;
+
+    @media screen and (max-width: 650px) {
+      font-size: 12px; 
+    }
   }
 
 </style>

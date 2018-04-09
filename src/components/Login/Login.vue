@@ -61,7 +61,7 @@ export default class Login extends Vue {
   userType: number = 1
 
   beforeMount() {
-    document.body.className = 'white-background'
+    document.body.className = 'grey-background'
   }
   
   /**
@@ -69,7 +69,6 @@ export default class Login extends Vue {
    * if successfully store access token recieved in Cookie and Store
    */
   submitLogin() {
-    console.log('submit login');
     if (!this.validation()) { return }
 
     http.post('login', {
