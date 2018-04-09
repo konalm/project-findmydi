@@ -203,8 +203,6 @@ export default class InductionAdiLicence extends Vue {
 
 
 <style lang="scss" scoped>
-  @import './scss/upload-img.scss';  
-
   .pic-container {
     width: 348px;
     height: 180px;
@@ -244,5 +242,7 @@ export default class InductionAdiLicence extends Vue {
   .button-container {
     margin-top: 10px;
   }
+
+  @import './scss/upload-img.scss';  
 </style>
 

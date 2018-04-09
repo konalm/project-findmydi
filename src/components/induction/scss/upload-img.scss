@@ -6,8 +6,18 @@
   margin: 0 auto;
   position: relative;
 
-  img {
+  @media screen and (max-width: 650px) {
     width: 70%;
+    height: 180px;
+    margin-top: 10px;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 80%;
+  }
+
+  img {
+    max-width: 70%;
     margin: 0 auto;
     position: absolute;
     top: 50%;
@@ -15,6 +25,14 @@
     transform: translate(-50%, -50%);
     opacity: 1.0;
     z-index: 3;
+
+    @media screen and (max-width: 650px) {
+      max-width: 60%;
+    }
+
+    @media screen and (max-width: 550px) {
+      max-width: 70%;
+    }
   }
 }
 
@@ -26,6 +44,14 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+
+  @media screen and (max-width: 650px) {
+    width: 70%;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 80%;
+  }
 
   .upload-avatar-button {
     width: 100%;
