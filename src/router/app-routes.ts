@@ -1,10 +1,17 @@
 import Coverage from '@/components/Coverage'
 import Profile from '@/components/Profile'
 import Reviews from '@/components/Reviews'
+import Stats from '@/components/Stats'
 import Auth from '@/authorization'
 
 
 const appRoutes = [
+  {
+    path: '/statistics',
+    name: 'Stats',
+    component: Stats,
+    beforeEnter: Auth 
+  },
   {
     path: '/profile',
     name: 'Profile',

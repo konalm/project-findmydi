@@ -33,7 +33,10 @@
     <div class="offer-container">
       <p class="form-text"> Offer </p> 
 
-      <textarea type="text" class="form-group" v-model="updateOffer" row="4" cols="50">
+      <textarea type="text" class="form-group" v-model="updateOffer" 
+        row="4" 
+        cols="50"
+      >
       </textarea>
     </div>
 
@@ -199,6 +202,12 @@ export default class EditProfileDetails extends Vue {
     color: #818181;
     width: 227px;
     height: 40px;
+
+    @media screen and (max-width: 650px) {
+      margin-left: 7px;
+      height: 35px;
+      width: 200px;
+    }
   }
 
   input.hourly-rate {

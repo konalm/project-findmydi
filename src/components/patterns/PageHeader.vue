@@ -24,5 +24,9 @@ export default class PageHeader extends Vue {
     font-weight: 500;
     color: rgb(50,50,60);
     border: none;
+
+    @media screen and (max-width: 650px) {
+      font-size: 20px;
+    }
   }
 </style>

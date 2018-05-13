@@ -63,6 +63,10 @@ export default class ReviewSummary extends Vue {
     text-align: center;
     font-size: 20px;
 
+    @media screen and (max-width: 650px) {
+      font-size: 16px;
+    }
+
     p {
       margin: 0;
       line-height: 33px;

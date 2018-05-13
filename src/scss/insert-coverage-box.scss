@@ -1,0 +1,99 @@
+  .close-button__container {
+    margin-bottom: 15px;
+  }
+
+  .button-container.summary {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+
+    button {
+      width: 130px;
+      font-weight: normal;
+    }
+    
+    .spacer {
+      width: 30px;
+    }
+  }
+
+ input {
+    width: 200px;
+    height: 40px;
+    margin: 0;
+
+    @media screen and (max-width: 650px) {
+      height: 35px;
+    }
+
+    &.range {
+      width: 100px;
+    }
+  }
+
+  .range-container {
+    margin-top: 30px;
+
+    @media screen and (max-width: 650px) {
+      margin-top: 15px;
+    }
+  }
+
+  .button-container {
+    margin-top: 30px;
+    padding-left: 20px;
+
+    @media screen and (max-width: 650px) {
+      margin-top: 15px;
+    }
+
+    &.summary {
+      padding-left: 0;
+    }
+
+    button {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+
+  .result-text {
+    font-weight: bold;
+  }
+
+  .modal-box {
+    width: 376px;
+
+    @media screen and (max-width: 650px) {
+      width: 100%;
+    }
+
+    .modal-box__body {
+      padding-left: 20px;
+      padding-top: 20px;
+      margin-bottom: 0;
+
+      p {
+        font-size: 16px;
+
+        @media screen and (max-width: 650px) {
+          font-size: 12px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+
+  .map-container {
+    padding: 20px 0 14px 0;
+
+    #map-canvas {
+      margin: 0 auto;
+      margin-bottom: 20px;
+
+      @media screen and (max-width: 650px) {
+        width: 200px;
+        height: 200px;
+      }
+    }
+  }

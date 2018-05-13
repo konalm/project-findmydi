@@ -27,6 +27,11 @@ import Component from 'vue-class-component'
 export default class Navbar extends Vue {
   navItems = [
     {
+      item: 'STATISTICS',
+      faIcon: 'far fa-chart-bar',
+      link: 'statistics',
+    },
+    {
       item: 'PROFILE',
       faIcon: 'fa fa-user',
       link: '/profile'
@@ -53,6 +58,12 @@ export default class Navbar extends Vue {
   ul.instapp__navbar {
     display: flex;
     margin-bottom: 40px;
+    // border: 1px solid blue;
+
+    @media screen and (max-width: 650px) {
+      padding: 0;
+      padding-left: 15px;
+    }
 
     li.instapp__navbar__item {
       margin-right: 30px;
@@ -68,6 +79,17 @@ export default class Navbar extends Vue {
       cursor: pointer;
       box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .03);
 
+      @media screen and (max-width: 650px) {
+        width: 85px;
+        height: 60px;
+        margin-right: 15px;
+        font-size: 11px;
+
+        .fa {
+          font-size: 17px;
+        }
+      }
+
       &.active {
         border: 1px solid $primary-color;
         background: #F2F2F2;
@@ -77,9 +99,13 @@ export default class Navbar extends Vue {
         height: 10px;
       }
 
-      .fa {
+      .fa, .far {
         font-size: 22px;
         color: $primary-color;
+
+        @media screen and (max-width: 650px) {
+          font-size: 17px;
+        }
       }
 
       p, .fa {

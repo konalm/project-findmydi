@@ -1,8 +1,7 @@
 <template>
-  <div class="modal-box__body update-coverage-box">
+  <div class="modal-box__body update-coverage-box update-region-coverage">
     <region-dropdown v-model="region" :view="'update-region-coverage'" />
 
-   
     <input type="number" class="range" placeholder="range" v-model="range" />
     Miles
 
@@ -188,6 +187,10 @@ export default class updateRegionCoverage extends Vue {
         button {
           width: 130px;
           height: auto;
+
+          @media screen and (max-width: 650px) {
+            line-height: 20px;
+          }
         }
       }
 
@@ -205,4 +208,20 @@ export default class updateRegionCoverage extends Vue {
       }
     }
   }
+</style>
+
+<style lang="scss">
+.update-region-coverage {
+  .region-search-container {
+    @media screen and (max-width: 700px) {
+      width: 90% !important;
+    }
+
+    input, ul {
+      @media screen and (max-width: 700px) {
+        width: 100% !important;
+      }
+    }
+  }
+}
 </style>

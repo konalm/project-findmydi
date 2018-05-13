@@ -70,7 +70,7 @@
 
 
 <script lang="ts">
-import Vue from 'Vue'
+import Vue from 'vue'
 import Component from 'vue-class-component'
 import {httpAuth} from '@/http-requests'
 import SuccessFeedback from './SuccessFeedback.vue'

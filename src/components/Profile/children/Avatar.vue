@@ -6,23 +6,16 @@
     </div>
 
     <div class="modal-box__body avatar-upload">
-      <form 
-        enctype="multipart/form-data"
-        novalidate
+      <form enctype="multipart/form-data" novalidate  
         v-on:submit.prevent="uploadAvatar()"
       />
         <div class="form-group avatar-container">
-          <img v-if="!user.avatar_url"
-            src="../../../assets/profilePic.jpg"
+          <img v-if="!user.avatar_url" src="../../../assets/profilePic.jpg" 
             alt="profile-pic" 
-            width="300px" 
           />
 
-          <img v-if="user.avatar_url"
-            v-bind:src="avatarImgSrc"
-            alt="profile-pic" 
+          <img v-if="user.avatar_url" v-bind:src="avatarImgSrc" alt="profile-pic" 
             class="avatar-img"
-            width="300px" 
           />
         </div>
 
@@ -33,7 +26,7 @@
             v-if="uploadAvatar"
           >
             <p v-if="!user.avatar_url">Upload a Profile Picture</p>
-            <p v-if="user.avatar_url">Upload a New Profile Picture</p>
+            <p v-if="user.avatar_url">Upload New Profile Picture</p>
           </label> 
 
           <input 
@@ -120,6 +113,11 @@ export default class InstructorAvatar extends Vue {
   .modal-box {
     width: 80%;
     margin-left: 50px;
+
+    @media screen and (max-width: 650px) {
+      margin-left: 0;
+      width: 100%;
+    }
   }
 
   .modal-box__body.avatar-upload {
@@ -131,7 +129,7 @@ export default class InstructorAvatar extends Vue {
       background: #2EA663;
       color: white; 
       padding: 7px 15px 7px 15px;
-      width: 300px;
+      width: 80%;
       font-weight: 300;
       cursor: pointer;
 
@@ -146,6 +144,7 @@ export default class InstructorAvatar extends Vue {
       padding: 0;
       text-align: left;
       text-decoration: underline;
+      width: 80%;
     }
 
     &.avatar-upload {
@@ -159,12 +158,16 @@ export default class InstructorAvatar extends Vue {
     padding: 20px 0 10px 0;
 
     button {
-      width: 300px;
+      width: 80%;
     }
   }
 
   .avatar-container {
     padding-top: 40px;
+
+    img {
+      width: 80%;
+    }
   }
 
   img.avatar-img {

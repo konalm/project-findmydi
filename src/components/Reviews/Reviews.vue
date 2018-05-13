@@ -16,13 +16,16 @@
 
     <div class="reviews-page__right-side">
       <review-summary :reviews="reviews" />
-      <review-invite v-on:inviteSent="getReviewRequests()" />
 
-      <review-request-item v-for="reviewRequest in reviewRequests" 
-        :key="reviewRequest.item" 
-        :review-request="reviewRequest"
-        v-on:reviewInvitesModified="getReviewRequests()"
-      />
+      <div class="review-invites">
+        <review-invite v-on:inviteSent="getReviewRequests()" />
+
+        <review-request-item v-for="reviewRequest in reviewRequests" 
+          :key="reviewRequest.item" 
+          :review-request="reviewRequest"
+          v-on:reviewInvitesModified="getReviewRequests()"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -101,15 +104,62 @@ export default class Reviews extends Vue {
 .container.reviews {
   display: flex;
 
+  @media screen and (max-width: 750px) {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
   .reviews-page__left-side {
     width: 60%;
     padding-right: 70px;
+
+    @media screen and (max-width: 991px) {
+      padding-right: 40px;
+    }
+
+    @media screen and (max-width: 750px) {
+      width: 70%;
+      padding-right: 0;
+    }
+
+    @media screen and (max-width: 650px) {
+      width: 80%;
+    }
+
+    @media screen and (max-width: 550px) {
+      width: 90%;
+    }
   }
 
   .reviews-page__right-side {
     width: 40%;
     padding-left: 30px;
     padding-right: 15px;
+
+    @media screen and (max-width: 991px) {
+      padding-right: 0;
+    }
+
+    @media screen and (max-width: 750px) {
+      width: 70%;
+      padding-left: 0;
+    }
+
+    @media screen and (max-width: 650px) {
+      width: 80%;
+    }
+
+    @media screen and (max-width: 550px) {
+      width: 90%;
+    }
+  }
+
+  .review-invites {
+    @media screen and (max-width: 750px) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
   }
 }
 </style>

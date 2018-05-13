@@ -1,5 +1,5 @@
 <template>
-  <layout :infoBox="true" :previousView="'/intro'">
+  <layout :infoBox="true" :previousView="'/induction'">
     <span slot="stepHeader">Hourly Rate</span>
 
     <span slot="introStep" v-if="allowedAccess"> 

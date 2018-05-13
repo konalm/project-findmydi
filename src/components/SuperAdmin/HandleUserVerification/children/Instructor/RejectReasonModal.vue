@@ -29,7 +29,7 @@
 
 
 <script lang="ts">
-import Vue from 'Vue'
+import Vue from 'vue'
 import Component from 'vue-class-component'
 import {Prop} from 'vue-property-decorator'
 import {httpAuth} from '@/http-requests'

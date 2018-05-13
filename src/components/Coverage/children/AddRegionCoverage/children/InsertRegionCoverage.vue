@@ -1,62 +1,60 @@
 <template>
-  <div>
-    <div class="modal-box insert-box">
-      <div class="modal-box__body">
-        <div class="close-button__container">
-          <button class="close-button small" v-on:click="$emit('toggleInsert')">
-            <i class="material-icons">close</i>
-          </button>
-        </div>
+<div class="modal-box insert-box insert-region-coverage">
+  <div class="modal-box__body">
+    <div class="close-button__container">
+      <button class="close-button small" v-on:click="$emit('toggleInsert')">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
 
-        <p class="region-text">Enter region with your city or another you wish to 
-          instructor your student.
-        </p>
+    <p class="region-text">Enter region with your city or another you wish to 
+      instructor your student.
+    </p>
 
-        <region-dropdown v-model="region" />
-        
-        <p class="api-response mt-3 text-danger" v-if="addRegionResponse">
-          {{ addRegionResponse }}
-        </p>
+    <region-dropdown v-model="region" />
+    
+    <p class="api-response mt-3 text-danger" v-if="addRegionResponse">
+      {{ addRegionResponse }}
+    </p>
 
-        <div class="button-container">
-          <button class="base-button padded-button" v-on:click="addRegion()" 
-            v-if="editRegion"
-          >
-            Proceed
-          </button>
+    <div class="button-container">
+      <button class="base-button padded-button" v-on:click="addRegion()" 
+        v-if="editRegion"
+      >
+        Proceed
+      </button>
 
-          <button class="base-button padded-button" v-on:click="toggleEditRegion()"
-            v-if="!editRegion"
-          >
-            Edit Region 
-          </button>
-        </div>  
+      <button class="base-button padded-button" v-on:click="toggleEditRegion()"
+        v-if="!editRegion"
+      >
+        Edit Region 
+      </button>
+    </div>  
 
-        <!-- range -->
-        <div class="range-container" v-if="!editRegion">
-          <p>How far are you willing to travel to instructor your lessons ?</p> 
+    <!-- range -->
+    <div class="range-container" v-if="!editRegion">
+      <p>How far are you willing to travel to instructor your lessons ?</p> 
 
-          <input type="number" class="range" v-model="range" /> Miles
-        </div>
+      <input type="number" class="range" v-model="range" /> Miles
+    </div>
 
-        <p class="api-response mt-3 text-danger" v-if="addCoverageResponse">
-          {{ addCoverageResponse }}
-        </p>
+    <p class="api-response mt-3 text-danger" v-if="addCoverageResponse">
+      {{ addCoverageResponse }}
+    </p>
 
-        <!-- add new coverage -->
-        <div class="button-container add-coverage" v-if="!editRegion">
-          <button class="base-button padded-button" v-on:click="addCoverage()">
-              <i class="fa fa-plus"></i> Coverage 
-          </button>
-        </div>
-      </div>
-
-      <!-- google map -->
-      <div class="map-container" v-bind:class="{'hide': this.editRegion}">
-        <div id="map-canvas"></div>
-      </div>
+    <!-- add new coverage -->
+    <div class="button-container add-coverage" v-if="!editRegion">
+      <button class="base-button padded-button" v-on:click="addCoverage()">
+          <i class="fa fa-plus"></i> Coverage 
+      </button>
     </div>
   </div>
+
+  <!-- google map -->
+  <div class="map-container" v-bind:class="{'hide': this.editRegion}">
+    <div id="map-canvas"></div>
+  </div>
+</div>
 </template>
 
 
@@ -244,6 +242,10 @@ input {
   border: 1px solid rgb(200,200,200);
   padding-left: 20px;
   margin: 0;
+
+  @media screen and (max-width: 650px) {
+    width: 100px;
+  }
 }
 
 input.range {
@@ -264,6 +266,10 @@ input.range {
 
     input.region-input {
       width: 350px;
+
+      @media screen and (max-width: 650px) {
+        width: 100px;
+      }
     }
   }
 }
@@ -279,3 +285,25 @@ input.range {
 }
 
 </style>
+
+<style lang="scss">
+.modal-box.insert-region-coverage {
+  .region-search-container {
+    @media screen and (max-width: 650px) {
+      width: 100%; 
+    }
+
+    input, ul {
+      @media screen and (max-width: 650px) {
+        width: 80%;
+      }
+
+      @media screen and (max-width: 550px) {
+        width: 100%;
+      }
+    }
+  }
+}
+</style>
+
+<style lang="scss" scoped src="../../../../../scss/insert-coverage-box.scss" />

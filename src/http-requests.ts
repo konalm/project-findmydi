@@ -15,7 +15,7 @@ export const http = axios.create({
 })
 
 /**
- * axios instance used in every aith request, 
+ * axios instance used in every auth request, 
  * (carries Auth access token in header)
  */
 export var httpAuth = axios.create({

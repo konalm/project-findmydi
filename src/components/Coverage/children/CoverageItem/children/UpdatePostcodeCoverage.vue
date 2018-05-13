@@ -1,33 +1,33 @@
 <template>
-   <div class="modal-box__body">
-    <input type="text" placeholder="postcode" v-model="postcode" />
-    <br />
-    <input type="number" placeholder="range" class="range" v-model="range" />
-    Miles
-  
-    <!-- error message -->
-    <p class="text-danger mt-3" v-if="errorMessage">
-      {{ errorMessage }}
-    </p>
+<div class="modal-box__body">
+  <input type="text" placeholder="postcode" v-model="postcode" />
+  <br />
+  <input type="number" placeholder="range" class="range" v-model="range" />
+  Miles
 
-    <!-- buttons -->
-    <div class="modal-box__button-container">
-      <button class="base-button secondary" v-on:click="updateMap()">
-        See change on map
-      </button>
+  <!-- error message -->
+  <p class="text-danger mt-3" v-if="errorMessage">
+    {{ errorMessage }}
+  </p>
 
-      <div class="spacer"></div>
+  <!-- buttons -->
+  <div class="modal-box__button-container">
+    <button class="base-button secondary" v-on:click="updateMap()">
+      See change on map
+    </button>
 
-      <button class="base-button" v-on:click="update()">
-        Update 
-      </button>
-    </div>
+    <div class="spacer"></div>
 
-    <!-- map -->
-    <div class="map-container">
-      <div id="map-canvas"></div>
-    </div>
+    <button class="base-button" v-on:click="update()">
+      Update 
+    </button>
   </div>
+
+  <!-- map -->
+  <div class="map-container">
+    <div id="map-canvas"></div>
+  </div>
+</div>
 </template>
 
 
@@ -169,6 +169,10 @@ export default class postcodeCoverage extends Vue {
         button {
           width: 130px;
           height: auto;
+
+          @media screen and (max-width: 650px) {
+            line-height: 20px;
+          }
         }
       }
     }
@@ -197,3 +201,4 @@ export default class postcodeCoverage extends Vue {
     }
   }
 </style>
+

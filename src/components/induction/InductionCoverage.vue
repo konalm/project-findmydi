@@ -1,68 +1,67 @@
 <template>
-  <layout :infoBox="true" :previousView="'/intro/hourly-rate'">
-    <span slot="stepHeader">Coverage</span>
+<layout :infoBox="true" :previousView="'/induction/hourly-rate'">
+  <span slot="stepHeader">Coverage</span>
 
-    <span slot="introStep" v-if="allowedAccess" class="coverage-step"> 
-      <p>Add your postcode, or postcode you wish to instruct your lessons</p>
+  <span slot="introStep" v-if="allowedAccess" class="coverage-step"> 
+    <p>Add your postcode, or postcode you wish to instruct your lessons</p>
 
-      <input type="text" class="form-group" placeholder="Postcode" 
-        v-model="postcode"
-        v-if="!coverageAdded" 
-      />
+    <input type="text" class="form-group" placeholder="Postcode" 
+      v-model="postcode"
+      v-if="!coverageAdded" 
+    />
 
-      <p v-if="coverageAdded"> <strong>{{ postcode }}</strong> </p>
+    <p v-if="coverageAdded"> <strong>{{ postcode }}</strong> </p>
 
-      <div class="range-container">
-        <p> How far are you willing to travel</p>
+    <div class="range-container">
+      <p class="range-text"> How far are you willing to travel ?</p>
 
-        <p v-if="!coverageAdded">  
-          <input type="text" class="form-group range" placeholder="Range" 
-            v-model="range" 
-          /> Miles
-        </p>
-
-        <p v-if="coverageAdded"> <strong>{{ range }} Miles</strong> </p>
-      </div>
-
-      <!-- error -->
-      <p v-if="errorMessage" class="text-danger"> 
-        {{ errorMessage }} 
+      <p v-if="!coverageAdded">  
+        <input type="text" class="form-group range" placeholder="Range" 
+          v-model="range" 
+        /> Miles
       </p>
 
-      <!-- map -->
-      <div>
-        <div id="map-canvas" v-bind:class="{'hide': !coverageAdded}"></div>
-      </div>
-      
-      <!-- buttons -->
-      <button class="base-button padded-button blue form-button" 
-        v-on:click="iniMapWithCoverageData()"
-        v-if="!coverageAdded"
-      >
-        <i class="fa fa-plus"></i> Coverage 
-      </button>
+      <p v-if="coverageAdded"> <strong>{{ range }} Miles</strong> </p>
+    </div>
 
-      <button class="base-button padded-button blue form-button" 
-        v-on:click="toggleCoverageAdd()"
-        v-if="coverageAdded"
-      >
-        Edit
-      </button>
-    </span>
+    <!-- error -->
+    <p v-if="errorMessage" class="text-danger"> 
+      {{ errorMessage }} 
+    </p>
 
-    <!-- proceed -->
-    <button slot="proceedButton" class="base-button padded-button"
-      v-on:click="proceed()" 
-      v-if="coverageAdded"
+    <!-- buttons -->
+    <button class="base-button padded-button blue form-button" 
+      v-on:click="iniMapWithCoverageData()"
+      v-if="!coverageAdded"
     >
-      Proceed 
+      <i class="fa fa-plus"></i> Coverage 
     </button>
 
+    <button class="base-button padded-button blue form-button" 
+      v-on:click="toggleCoverageAdd()"
+      v-if="coverageAdded"
+    >
+      Edit
+    </button>
 
-    <p slot="infoText"> 
-      More coverages can be added in application.
-    </p>
-  </layout>
+    <!-- map -->
+    <div>
+      <div id="map-canvas" v-bind:class="{'hide': !coverageAdded}"></div>
+    </div>
+  </span>
+
+  <!-- proceed -->
+  <button slot="proceedButton" class="base-button padded-button"
+    v-on:click="proceed()" 
+    v-if="coverageAdded"
+  >
+    Proceed 
+  </button>
+
+  <p slot="infoText"> 
+    More coverages can be added in application.
+  </p>
+</layout>
 </template>
 
 
@@ -249,12 +248,17 @@ export default class InductionCoverage extends Vue {
       width: 100px;
       margin-right: 7px;
     }
+
+    .range-text {
+      @media screen and (max-width: 600px) {
+        width: 110px;
+      }
+    }
   }
 
   .map-canvas-container {
     width: 500px;
     height: 500px;
-    border: 1px solid green;
 
     #map-canvas {
       width: 150px;
@@ -268,6 +272,13 @@ export default class InductionCoverage extends Vue {
     position: absolute !important;
     top: 70px;
     right: 7%;
+
+    @media screen and (max-width: 600px) {
+      width: 170px;
+      height: 170px;
+      top: 50px;
+      right: 4%;
+    }
   }
 </style>
 

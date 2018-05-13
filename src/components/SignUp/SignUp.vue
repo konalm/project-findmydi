@@ -1,77 +1,79 @@
 <template>
-  <div>
+  <div class="page-wrapper">
     <logged-out-header :loggedIn="false" />
 
-    <h1 class="text-center"> Sign Up </h1>
+    <div class="signup-container">
+      <h1 class="text-center"> Sign Up </h1>
 
-    <div class="container my-form">
-      <form v-on:submit.prevent="submitSignUp()" v-if="!registered">
-        <!-- name -->
-        <div class="form-row split form-group">
-          <input type="text" class="form-control" placeholder="First Name"
-            v-model="firstName"
-          >
-
-          <input type="text"  class="form-control" placeholder="Surname"
-            v-model="surname"
-          >
-        </div>
-
-        <!-- email -->
-        <div class="form-row">
-          <input type="email" class="form-control" placeholder="Email Address"
-            v-model="email"
-          >
-        </div>
-
-        <!-- adi license number -->
-        <div class="form-row">
-          <input  type="number"  class="form-control" placeholder="ADI License Number" 
-            v-model="adi"
-          >
-        </div>
-
-        <!-- password -->
-        <div class="form-row">
-          <input type="password" class="form-control" placeholder="Password"
-            v-model="password"
-          >
-        </div>
-
-        <!-- confirm pasword -->
-        <div class="form-row">
-            <input type="password" class="form-control" placeholder="Confirm Password" 
-              v-model="confirmPassword"
+      <div class="container my-form">
+        <form v-on:submit.prevent="submitSignUp()" v-if="!registered">
+          <!-- name -->
+          <div class="form-row split form-group">
+            <input type="text" class="form-control" placeholder="First Name"
+              v-model="firstName"
             >
-        </div>
 
-        <div class="form-row">
-          <label class="form-check-label">
-            <input type="radio" class="form-check-input" value="female"
-              v-model="gender"
+            <input type="text"  class="form-control" placeholder="Surname"
+              v-model="surname"
             >
-            Female
-          </label>
+          </div>
 
-            <label class="form-check-label male">
-              <input type="radio" class="form-check-input" value="male" checked
+          <!-- email -->
+          <div class="form-row">
+            <input type="email" class="form-control" placeholder="Email Address"
+              v-model="email"
+            >
+          </div>
+
+          <!-- adi license number -->
+          <div class="form-row">
+            <input  type="number"  class="form-control" placeholder="ADI License Number" 
+              v-model="adi"
+            >
+          </div>
+
+          <!-- password -->
+          <div class="form-row">
+            <input type="password" class="form-control" placeholder="Password"
+              v-model="password"
+            >
+          </div>
+
+          <!-- confirm pasword -->
+          <div class="form-row">
+              <input type="password" class="form-control" placeholder="Confirm Password" 
+                v-model="confirmPassword"
+              >
+          </div>
+
+          <div class="form-row">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" value="female"
                 v-model="gender"
               >
-              Male
-          </label>
-        </div>
+              Female
+            </label>
 
-        <div class="form-row">
-          <button type="submit" class="form">Sign Me Up</button>
-        </div>
+              <label class="form-check-label male">
+                <input type="radio" class="form-check-input" value="male" checked
+                  v-model="gender"
+                >
+                Male
+            </label>
+          </div>
 
-        <!-- error message -->
-        <div class="form-group mt-3" v-if="errorMessage">
-          <p class="text-danger">{{ errorMessage }}</p>
-        </div>
-      </form>
+          <div class="form-row">
+            <button type="submit" class="form">Sign Me Up</button>
+          </div>
 
-      <sign-up-success v-if="registered" />
+          <!-- error message -->
+          <div class="form-group mt-3" v-if="errorMessage">
+            <p class="text-danger">{{ errorMessage }}</p>
+          </div>
+        </form>
+
+        <sign-up-success v-if="registered" />
+      </div>
     </div>
   </div>
 </template>
@@ -104,6 +106,10 @@ export default class SignUp extends Vue {
   gender: string= ''
   registered: boolean = false
   errorMessage: string = ''
+
+  beforeMount() {
+    document.body.className = 'grey-background'    
+  }
 
 
   /**

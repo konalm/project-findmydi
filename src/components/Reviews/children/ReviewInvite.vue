@@ -105,6 +105,14 @@ export default class ReviewInvite extends Vue {
   font-size: 18px;
   cursor: pointer;
 
+  @media screen and (max-width: 750px) {
+    margin-bottom: 30px;
+  }
+
+  @media screen and (max-width: 650px) {
+    font-size: 14px;
+  }
+
   .close-button__container {
     text-align: left;
     margin-bottom: 15px;
