@@ -208,11 +208,7 @@ export default class InductionAdiLicence extends Vue {
     height: 180px;
 
     .adi-img-preview {
-<<<<<<< HEAD
-      height: 150px;
-=======
       height: 160px;
->>>>>>> mobile-visuals
       width: auto;
     }
   }
