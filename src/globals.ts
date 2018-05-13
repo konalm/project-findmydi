@@ -8,6 +8,9 @@ switch (window.location.hostname) {
   case 'staging.app.findmydi.com':
     apiUrl = 'http://staging.api.findmydi.com/';
     break;
+  case 'app.findmydi.com':
+    apiUrl = 'http://api.findmydi.com/';
+    break;
 }
 
 /**
